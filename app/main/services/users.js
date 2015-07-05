@@ -56,12 +56,12 @@ angular.module('main')
     };
 
     var subscribeWish = function(userId, wishId) {// deprecated TODO notif
-//        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        //        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendings'), wishId);
     };
 
     var addPendingFriend = function(userId, friendId) {// TODO notif
-//        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        //        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendingFriends'), friendId);
     };
 
@@ -86,7 +86,7 @@ angular.module('main')
     };
 
     var addWish = function(userId, wish) {// TODO notif
-//        Materialize.toast('Votre nouvelle envie à été postée    .', 4000);
+        //        Materialize.toast('Votre nouvelle envie à été postée    .', 4000);
         return FbUtil.addOrSet(Ref.child('users/' + userId + '/wishes'), wish);
     };
 
@@ -96,7 +96,7 @@ angular.module('main')
 
     var endWish = function(userId, wish) {// TODO notif
         console.log('endWish:', wish);
-//        Materialize.toast('Votre envie "' + wish.title + '" se termine.', 4000);
+        //        Materialize.toast('Votre envie "' + wish.title + '" se termine.', 4000);
 
         // to user.historic
         FbUtil.addOrSet(Ref.child('users/' + userId + '/historic'), wish.id);
@@ -170,10 +170,10 @@ angular.module('main')
     var getIdFromHistoric = function(userId, id) {
         return $firebaseObject(Ref.child('users/' + userId + '/historic/' + id));   
     };
-//
-//    var getIdFromWishes = function(userId, id) {
-//        return $firebaseObject(Ref.child('users/' + userId + '/wishes/' + id));   
-//    };
+    //
+    //    var getIdFromWishes = function(userId, id) {
+    //        return $firebaseObject(Ref.child('users/' + userId + '/wishes/' + id));   
+    //    };
 
     var getNotif = function(userId, id) {
         return $firebaseObject(Ref.child('users/' + userId + '/notifications/' + id));   
@@ -218,6 +218,16 @@ angular.module('main')
         return def.promise;
     };
 
+    var updateGeoloc = function(userId, lat, long) {
+        var user = getUserInfos(userId);
+
+        user.$loaded(function() {
+            user.location.lat = lat;
+            user.location.long = long;
+            user.$save();
+        });
+    };
+
     return {
         get: getUser,
         getInfos: getUserInfos,
@@ -244,6 +254,7 @@ angular.module('main')
         getWishIds: getWishIds,
         deleteWishFromHistoric: deleteWishFromHistoric,
         cancelWish: cancelWish,
-        getWishState: getWishState
+        getWishState: getWishState,
+        updateGeoloc: updateGeoloc
     };
 });

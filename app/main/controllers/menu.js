@@ -4,6 +4,8 @@ angular.module('main')
 
     var vm = this;
 
+    
+
     Auth.$requireAuth().then(function(data) {
         var user = data;
 

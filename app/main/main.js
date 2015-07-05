@@ -4,7 +4,7 @@ angular.module('main', [
     'ngCordova',
     'ui.router',
     // TODO: load other modules selected during generation
-    'firebase', 'firebase.auth', 'firebase.ref', 'uiGmapgoogle-maps', 'geolocation', 'ngAnimate'
+    'firebase', 'firebase.auth', 'firebase.ref', 'uiGmapgoogle-maps', 'geolocation'
 ])
     .config(function($stateProvider, SECURED_ROUTES) {
     // credits for this idea: https://groups.google.com/forum/#!msg/angular/dPr9BpIZID0/MgWVluo_Tg8J
@@ -36,39 +36,20 @@ angular.module('main', [
     });
 
     $stateProvider
-    // this state is placed in the <ion-nav-view> in the index.html
-        .state('main.list', {
-        url: '/list',
-        views: {
-            'pageContent': {
-                templateUrl: 'main/templates/list.html',
-                // controller: '<someCtrl> as ctrl'
-            }
-        }
-    })
-        .state('main.listDetail', {
-        url: '/list/detail',
-        views: {
-            'pageContent': {
-                templateUrl: 'main/templates/list-detail.html',
-                // controller: '<someCtrl> as ctrl'
-            }
-        }
-    })
-        .state('main.debug', {
-        url: '/debug',
-        views: {
-            'pageContent': {
-                templateUrl: 'main/templates/debug.html',
-                controller: 'DebugCtrl as ctrl'
-            }
-        }
-    })
         .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'main/templates/menu.html',
         controller: 'MenuCtrl as vm'
+    })
+        .state('app.debug', {
+        url: '/debug',
+        views: {
+            'pageContent': {
+                templateUrl: 'main/templates/debug.html',
+                controller: 'DebugCtrl as vm'
+            }
+        }
     })
 
         .stateAuthenticated('app.newwish', {
@@ -226,7 +207,7 @@ angular.module('main', [
             $state.go('app.login');
         }
     }
-    
+
     // watch for login status changes and redirect if appropriate
     Auth.$onAuth(check);
 

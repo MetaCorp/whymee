@@ -4,7 +4,7 @@
             <ul class="z-depth-1 wish-coll">
                 <li ng-click="vm.selectWish(vm.selectedWish)">
                     <div class="container">
-                        <img src="../img/photo.png" ng-src="{{ vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
                         <div class="title">
                             {{ vm.selectedWish.title }}
                         </div>
@@ -68,10 +68,10 @@
                             <img src="main/assets/images/picto-participants-copie.png" alt="">
                             {{ wish.contributors }}
                         </div>
-                        <img ng-show="vm.getWishState(wish.id) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="../img/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="../img/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="../img/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'loading'" class="action" src="../img/btn-chargement.png" alt="">
+                        <img ng-show="vm.getWishState(wish.id) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
+                        <img ng-show="vm.getWishState(wish.id) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish.id) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish.id) === 'loading'" class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
                 </li>
             </ul>
