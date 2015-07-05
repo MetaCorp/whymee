@@ -1,0 +1,51 @@
+<ion-view view-title="Mes envies">
+    <ion-content>
+        <div ng-show="vm.wishes.length === 0 && vm.historic.length === 0">
+            Aucune envie, créez ou ralliez une envie!
+        </div>
+        <ion-list can-swipe="true" class="wish-coll2">
+            <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.wishes | orderBy: 'date_start': true" class="repeat-animation">
+                <ion-option-button class="ion-minus-circled"
+                                   ng-click="vm.cancelWish(wish)">
+                </ion-option-button>
+                <div class="container">
+                    <div class="title">
+                        {{ wish.title }}
+                    </div>
+                    <div class="date">
+                        {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
+                    </div>
+                    <div class="contrib">
+                        <img src="main/assets/images/picto-participants-copie.png" alt="">
+                        {{ wish.contributors }}
+                    </div>
+                    <div class="avatar-list">
+                        <img ng-click="vm.goProfil(wish.owner, $event)" src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}" alt="" class="circle">
+                        <img ng-repeat="user in vm.getContributors(wish.id)"
+                            src="main/assets/images/photo.png" ng-src="{{ user.avatar }}" alt="" class="circle">
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.historic | orderBy: 'date_start': true" class="repeat-animation">
+                <ion-option-button class="ion-minus-circled"
+                                   ng-click="vm.deleteWishFromHistoric(wish)">
+                </ion-option-button>
+                <div class="container">
+                    <div class="title">
+                        {{ wish.title }}
+                    </div>
+                    <div class="date">
+                        {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
+                    </div>
+                    <div class="contrib">
+                        <img src="main/assets/images/picto-participants-copie.png" alt="">
+                        {{ wish.contributors }}
+                    </div>
+                    <div class="avatar-list">
+                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}" alt="" class="circle">
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

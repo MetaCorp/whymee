@@ -1,0 +1,16 @@
+<ion-view view-title="Contacts">
+    <ion-content>
+        <ul class="collection">
+            <li ng-click="vm.selectFriend(friend)" ng-repeat="friend in vm.pendingFriends" class="collection-item avatar">
+                <img ng-src="{{ friend.avatar }}" alt="" class="circle">
+                <span class="title">{{ friend.username }} (en attente)</span>
+                <a ng-click="vm.confirmFriend(friend)" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+            <li ng-click="vm.selectFriend(friend)" ng-repeat="friend in vm.friends" class="collection-item avatar">
+                <img ng-src="{{ friend.avatar }}" alt="" class="circle">
+                <span class="title">{{ friend.username }}</span>
+                <a ui-sref="app.wish({wish: 'wish'})" class="secondary-content"><i class="mdi-action-grade"></i></a>
+            </li>
+        </ul>
+    </ion-content>
+</ion-view>

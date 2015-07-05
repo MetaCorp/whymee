@@ -1,0 +1,17 @@
+<ion-view view-title="Profil">
+    <ion-content scroll="false">
+        <div class="header-pic">
+            <img class="avatar" ng-src="{{ vm.profil.avatar }}" alt="">
+            <!--
+<div class="image-cropper">
+<img class="rounded" ng-src="{{ vm.profil.avatar }}" alt="">
+</div>
+-->
+        </div>
+        <div class="row">
+            <h2>{{ vm.profil.username }}</h2>
+        </div>
+        <a ng-hide="vm.isPending" ng-click="vm.addFriend()" class="waves-effect waves-light btn">Ajouter</a>
+        <a ng-show="vm.isFriend" ng-click="vm.chat()" class="waves-effect waves-light btn">Messages</a>
+    </ion-content>
+</ion-view>

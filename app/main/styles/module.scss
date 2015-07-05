@@ -1,0 +1,787 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+*/
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #4a87ee !default;
+$calm:                            #43cee6 !default;
+$balanced:                        #66cc33 !default;
+$energized:                       #f0b840 !default;
+$assertive:                       #ef4e3a !default;
+$royal:                           #8a6de9 !default;
+$dark:                            #444 !default;
+
+// The path for our ionicons font files, relative to the built & temporary module.css
+$ionicons-font-path: "../assets/fonts" !default;
+
+// Include all of Ionic
+@import "../../bower_components/ionic/scss/ionic";
+
+/* Empty. Add your own CSS if you like */
+body {
+    font-family: Roboto;
+}
+
+ion-side-menu.left ion-header-bar {
+    height: 150px!important;   
+}
+
+ion-side-menu.left ion-content {
+    top: 150px!important;
+}
+
+ion-side-menu.left ion-header-bar img {
+    position: absolute;
+    top: 39px;
+    left: 30px;
+}
+
+ion-nav-bar ion-header-bar {
+    box-shadow: 0px 0px 5px 0px #656565;
+}
+
+ion-header-bar {
+    background-color: white !important;
+}
+
+ion-side-menu.left ion-header-bar {
+    background-color: black !important;
+    background: url(../assets/images/picto-reglages.png);
+}
+
+ion-side-menu.left ion-header-bar .content {
+    position: absolute;
+    top: 45px;
+    left: 130px;
+    color: white;
+    font: 700 18px / 36px Roboto;
+}
+
+ion-side-menu.left ion-header-bar span {
+    position: absolute;
+    top: 70px;
+    left: 130px;
+    color: white;
+    font: 300 14px / 36px Roboto;
+}
+
+ion-side-menu ion-list ion-item a.item-content {
+    padding-left: 60px !important;
+    padding-top: 17px !important;
+    font: 400 18px / 36px Roboto;
+    color: #3d3d3d;
+    border-bottom: 1px solid #dcdcdc !important;
+}
+
+ion-side-menu ion-list ion-item {
+    border: none !important;
+    border-bottom: 1px solid lightgray !important;
+}
+
+
+ion-side-menu.right ion-header-bar .content {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+}
+
+ion-side-menu.left ion-header-bar {
+    overflow: hidden;
+    background-color: none !important;
+    background-image: none !important;
+}
+
+ion-side-menu.left ion-header-bar .bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 275px;
+}
+
+ion-side-menu ion-header-bar .content {
+    font-size: medium;
+    margin: 0;
+}
+
+.map-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.map-container .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+}
+
+.map-container.wish .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 120px;
+}
+
+.wish-list {
+    position: absolute;
+    overflow: visible;
+}
+
+label.new-wish-title {
+    padding: 30px;
+    height: 120px;
+}
+label.new-wish-title textarea {
+    font: 400 20px Roboto;
+    color: #3d3d3d;
+
+}
+
+
+ul.collection {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    /*    overflow-y: scroll;*/
+}
+
+
+.new-message {
+    position: absolute;
+    width: 100%
+}
+
+.new-message a {
+    position: relative;
+    top: -60px;
+    left: 280px;
+}
+
+.toast {
+    font-size: medium;   
+}
+
+#pending-list {
+    position: relative;
+    top: 0px;
+}
+
+ion-item.notif {
+    font-size: small;
+}
+
+ul.wish-coll {
+    background-color: white;
+}
+ul.wish-coll li {
+    position: relative;
+    height: 120px;
+    border-bottom: 1px solid #dcdcdc;
+}
+ul.wish-coll li img {
+    margin-right: 3px;
+}
+ul.wish-coll li img.avatar {
+    position: absolute;
+    left: 20px;
+    top: 14px;
+    width: 69px;
+    height: 69px;
+}
+ul.wish-coll li .title {
+    position: absolute;
+    left: 105px;
+    top: 34px;
+    right: 60px;
+    font: 400 16px Roboto;
+}
+ul.wish-coll li .dist {
+    position: absolute;
+    left: 32px;
+    top: 80px;
+    color: #a5a5a5;
+    font: 400 11px / 36px Roboto;
+}
+ul.wish-coll li .dist.deco {
+    padding-left: 8px;
+}
+ul.wish-coll li .date {
+    position: absolute;
+    left: 105px;
+    top: 66px;
+    color: #a5a5a5;
+    font: 400 11px / 36px Roboto;
+}
+ul.wish-coll li .contrib {
+    position: absolute;
+    right: 82px;
+    top: 66px;
+    color: #a5a5a5;
+    font: 700 11px / 36px Roboto;
+}
+ul.wish-coll li .action {
+    position: absolute;
+    right: 14px;
+    top: 36px;
+    color: #a5a5a5;
+    font: 700 11px / 36px Roboto;
+}
+ul.wish-coll li .container {
+    padding: 0;
+}
+
+input.disabled {
+    background-color: white;
+}
+
+ion-list.wish-coll2 {
+    background-color: white;
+}
+ion-list.wish-coll2 ion-item {
+    position: relative;
+    height: 130px;
+    border-bottom: 1px solid #dcdcdc;
+}
+ion-list.wish-coll2 ion-item .item-content {
+    height: 100%;
+}
+ion-list.wish-coll2 ion-item .title {
+    position: absolute;
+    left: 40px;
+    top: 20px;
+    font: 400 16px Roboto;
+}
+ion-list.wish-coll2 ion-item .date {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    color: #a5a5a5;
+    font: 400 11px / 36px Roboto;
+}
+ion-list.wish-coll2 ion-item .contrib {
+    position: absolute;
+    right: 40px;
+    top: 14px;
+    color: #a5a5a5;
+    font: 700 11px / 36px Roboto;
+}
+ion-list.wish-coll2 ion-item .avatar-list {
+    position: absolute;
+    left: 40px;
+    top: 73px;
+}
+ion-list.wish-coll2 ion-item .avatar-list img {
+    width: 44px;
+    height: 44px;
+}
+
+.wish-list .header {
+    background-color: white;
+    height: 20px;
+    text-align: center;
+}
+
+.wish-list .header .arrow {
+    position: relative;
+    top: -25px;
+    background-color: white;
+    border-radius: 35px;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    padding-top: 11px;
+}
+
+.wish-list .header i {
+    position: relative;
+    top: 13px;
+    color: lightgray;
+}
+
+img.blur { 
+    -webkit-filter: blur(10px); 
+    filter: blur(10px);
+}
+
+.extra img {
+    margin-left: 8px;   
+}
+
+.extra img:first-child {
+    margin-left: 0;
+}
+
+
+
+ion-side-menu ion-item img {
+    position: relative;
+    left: -20px;
+    top: 8px;
+    float: left;
+}
+
+.title.header-item {
+    left: 20px !important;
+    text-align: center !important;
+}
+
+.title-image {
+    position: relative;
+    top: 6px;
+}
+
+.wish-content {
+    position: absolute;
+    overflow: visible;
+    background-color: white;
+}
+.wish-content .header {
+    position: relative;
+    color: white;
+    padding: 20px 10px;
+    height: 121px;
+}
+.wish-content .header .avatar {
+    position: absolute;
+    left: 20px;
+    top: 17px;
+    width: 69px;
+    height: 69px;
+}
+.wish-content .header .title {
+    position: absolute;
+    left: 100px;
+    top: 13px;
+    color: white;
+    font-size: large;
+    position: relative;
+}
+.wish-content .header .date {
+    position: absolute;
+    left: 110px;
+    top: 65px;
+}
+.wish-content .header .user {
+    position: absolute;
+    left: 110px;
+    top: 84px;
+    font-weight: 300;
+    color: #bcf3ff;
+}
+.wish-content .header .dist {
+    position: absolute;
+    left: 30px;
+    top: 90px;
+    font-size: small;
+}
+.wish-content .header .contrib {
+    position: absolute;
+    left: 285px;
+    top: 65px;
+}
+.wish-content .contrib {
+    width: 100%;
+}
+.wish-content .content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    height: 400px;
+}
+.wish-content .content .photo {
+    text-align: center;
+}
+.wish-content .content .title {
+    width: 20%;
+}
+.wish-content .content h3 {
+    margin-bottom: 20px;
+    font-size: medium;
+    margin-left: 20px;
+}
+.wish-content .collection-repeat-container {
+    position: relative;
+    top: 20px;
+}
+
+.wish-overlay {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.wish-overlay ul {
+    border-radius: 10px;  
+}
+
+.wish-overlay.ng-hide {
+    opacity: 0;   
+}
+
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.header-pic {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    text-align: center;
+}
+
+.header-pic img.circle {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    margin: auto;
+    top: 40px;
+}
+
+ul.message-coll li {
+    position: relative;
+}
+ul.message-coll img {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+.message-coll .user {
+    position: absolute;
+    top: 7px;
+    left: 80px;
+    color: gray;
+}
+.message-coll .time {
+    float: right;
+    position: relative;
+    right: 25px;
+    top: 10px;
+    font-size: small;
+    color: gray;
+}
+.message-coll .title {
+    position: relative;
+    top: 30px;
+    white-space: pre;
+    background-color: lightblue;
+    padding: 10px;
+    margin: 0 20px 0 75px;
+    border-radius: 5px;
+}
+ul.message-coll li.owner .title {
+    background-color: lightgray;
+}
+
+.repeat-animation.ng-enter-stagger {
+    -webkit-transition-delay:0.1s;
+    transition-delay:0.1s;
+    -webkit-transition-duration:0;
+    transition-duration:0;
+}
+
+.repeat-animation.ng-enter {
+    -webkit-transition: 0.4s ease-in-out all;
+    transition: 0.4s ease-in-out all;
+
+    opacity: 0;
+    margin-left: 40px;
+}
+
+.repeat-animation.ng-enter.ng-enter-active {
+    opacity: 1;
+    margin-left: 0;
+}
+
+form.login {
+    margin: 40px;
+}
+
+.settings-coll ion-item {
+    height: 70px;
+}
+.settings-coll .action {
+    float: right;
+    position: relative;
+    right: 10px;
+    top: 8px;
+}
+.settings-coll .title {
+    position: relative;
+    left: 20px;
+    color: #3d3d3d;
+    font: 300 16px / 36px Roboto;
+}
+
+.settings {
+    background-color: #eee;
+}
+.settings .content {
+    position: relative;
+    top: 30px;
+    background-color: white;
+    height: 100%;
+}
+.settings .content .actions {
+    text-align: center;
+}
+
+.item-input {
+    height: 70px;
+}
+
+.item-input input {
+    color: #3d3d3d;
+    font: 500 16px / 36px Roboto;
+}
+.item-input .item-label {
+    color: #b7b7b7;
+    font: 400 16px / 36px Roboto;
+}
+
+.btnDeco {
+    position: absolute;
+    bottom: 97px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    color: #3d3d3d;
+    font: 400 18px / 36px Roboto;
+}
+.btnDelete {
+    position: absolute;
+    bottom: 30px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    color: #3d3d3d;
+    font: 400 15px / 36px Roboto;
+    height: 50px;
+    padding-top: 7px;
+}
+
+.login-content {
+    background: url(../assets/images/login-bg.png);
+}
+
+.login-input {
+    padding-left: 15px;
+    padding-top: 0;
+    margin-bottom: 12px;
+    height: 45px;
+    border: 0;
+}
+.login-input input {
+    color: #676767;
+    font: 300 14px / 36px Roboto;
+}
+
+.btn-login {
+    border: none;
+    display: block;
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    font: 400 18px / 36px Roboto;
+    margin-bottom: 12px;
+}
+
+.login-logo {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 60px;
+}
+.login-logo img {
+    width: 150px;
+}
+
+.or {
+    color: #ffffff;
+    font: 500 16px / 36px Roboto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.badge-notif {
+    position: relative;
+    top: 5px;
+    right: 5px;
+    color: #ffffff;
+    font: 700 11px Roboto;
+    padding: 9px;
+    padding-top: 6px;
+    height: 25px;
+    border-radius: 50%;
+}
+.header-item.title {
+    color: #3d3d3d;
+    font: 700 18px / 36px Roboto;
+}
+
+.datetime-input {
+    height: 70px;
+    border-top: 1px solid lightgray;
+}
+.datetime-input .title1 {
+    width: 60px;
+    padding: 20px;
+    padding-top: 25px;
+    color: #3d3d3d;
+    font: 400 17px Roboto;
+    border-right: 1px solid lightgray;
+    height: 100%;
+    float: left;
+}
+.datetime-input .content1 {
+    float: left;
+    position: relative;
+    left: 0;
+    right: 100px;
+    border-right: 1px solid lightgray;
+}
+.datetime-input .title2 {
+    color: #3d3d3d;
+    font: 400 17px Roboto;
+    height: 100%;
+}
+
+.newwish-input {
+    height: 70px;
+    border-top: 1px solid lightgray;
+}
+.newwish-input .title {
+    width: 35%;
+    padding: 20px;
+    padding-top: 25px;
+    color: #3d3d3d;
+    font: 400 17px Roboto;
+    border-right: 1px solid lightgray;
+    height: 100%;
+    float: left;
+}
+.newwish-input .content {
+    position: relative;
+    top: 12px;
+    left: 15px;
+}
+.newwish-input .content img {
+    margin: 0 5px;
+}
+
+.post-wish {
+    text-align: center;
+}
+.post-wish img {
+    width: 70px;
+    background: url(../assets/images/participants2.png);
+}
+
+.icn { 
+    margin-right: 5px;
+}
+
+.btn-go {
+    float: right;
+    position: relative;
+    top: -55px;
+    right: 12px;
+}
+
+.header-pic .avatar {
+    width: 100%;
+}
+
+.center-container {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.about-logo {
+    width: 150px;
+}
+.about-version {
+    position: absolute;
+    right: 65px;
+    top: 55px;
+}
+
+.circle { border-radius: 50%; }
+
+.gray { background-color: gray; }
+.purple { background-color: #9a00af; }
+.facebook { background-color: #3c5a98;; }
+.blue { background-color: #46bdd7; }
+.white-text { color: white; }
+
+ul.chat-coll li {
+    position: relative;
+    height: 120px;
+    border-bottom: 1px solid #dcdcdc;
+}
+ul.chat-coll li .title {
+    position: absolute;
+    top: 40px;
+    left: 110px;
+    font: 500 16.58px / 17.497px Roboto;
+}
+ul.chat-coll li img.avatar {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+}
+ul.chat-coll li .extra {
+    position: absolute;
+    left: 110px;
+    top: 53px;
+    font: 300 11px / 36px Roboto;
+    color: gray;
+}
+ul.chat-coll li .action {
+    position: absolute;
+    top: 48px;
+    right: 20px;
+    font: 300 11px / 36px Roboto;
+}
+
+
+/*======= Map Styling - CARE ============*/
+.gmnoprint a, .gmnoprint span {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+#GMapsID div div a div img{
+    display:none;
+}

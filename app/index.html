@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>whymee</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css main/styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="main/styles/module.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="whymee">
+
+    <!-- the nav bar will be updated as we navigate between views -->
+    <!-- <ion-nav-bar> can be removed when using sidemenu (contained in menu.html) -->
+    <ion-nav-bar class="bar-balanced">
+      <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <!-- the current view will be rendered in the <ion-nav-view> directive -->
+    <ion-nav-view></ion-nav-view>
+
+    <!-- will be a 404 during development -->
+    <script src="cordova.js"></script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/localforage/dist/localforage.js"></script>
+    <script src="bower_components/angular-localForage/dist/angular-localForage.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="bower_components/angularjs-geolocation/src/geolocation.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/app.js -->
+    <!-- inject:js -->
+    <script src="main/main.js"></script>
+    <script src="main/services/WorkerService.js"></script>
+    <script src="main/services/wishes.js"></script>
+    <script src="main/services/users.js"></script>
+    <script src="main/services/user.js"></script>
+    <script src="main/services/main-serv.js"></script>
+    <script src="main/services/geocode.js"></script>
+    <script src="main/services/fbutil.js"></script>
+    <script src="main/services/device.js"></script>
+    <script src="main/services/chats.js"></script>
+    <script src="main/filters/cdate.js"></script>
+    <script src="main/controllers/wishes.js"></script>
+    <script src="main/controllers/wish.js"></script>
+    <script src="main/controllers/settings.js"></script>
+    <script src="main/controllers/profil.js"></script>
+    <script src="main/controllers/pref.js"></script>
+    <script src="main/controllers/new-wish.js"></script>
+    <script src="main/controllers/menu.js"></script>
+    <script src="main/controllers/login.js"></script>
+    <script src="main/controllers/intro.js"></script>
+    <script src="main/controllers/infos.js"></script>
+    <script src="main/controllers/friends.js"></script>
+    <script src="main/controllers/debug-ctrl.js"></script>
+    <script src="main/controllers/chats.js"></script>
+    <script src="main/controllers/chat.js"></script>
+    <script src="main/controllers/around.js"></script>
+    <script src="main/controllers/account.js"></script>
+    <script src="main/controllers/about.js"></script>
+    <script src="main/constants/config-const.js"></script>
+    <script src="main/angularfire/firebase.ref.js"></script>
+    <script src="main/angularfire/config.js"></script>
+    <script src="main/angularfire/auth.js"></script>
+    <script src="app.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+  </body>
+</html>

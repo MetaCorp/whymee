@@ -1,0 +1,26 @@
+<ion-view view-title="Intro">
+    <ion-content>
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+                <div class="box"><h1>Bienvenue dans Whymee!</h1></div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box">
+                    <div class="input-field">
+                        <input ng-model="vm.user.first_name" id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input ng-model="vm.user.last_name" id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="box">
+                    <a ng-click="vm.save()" class="waves-effect waves-light btn">Ok</a>
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>

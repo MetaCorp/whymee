@@ -1,0 +1,64 @@
+<ion-view view-title="{{ vm.wish.title }}">
+    <ion-content scroll="false">
+        <div class="map-container wish">
+            <ui-gmap-google-map options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom'>
+                <ui-gmap-marker coords="vm.marker.coords" options="vm.marker.options" events="vm.marker.events" idkey="vm.marker.id">
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+        <ion-content scroll="true" class="wish-content" style="top: {{ vm.screenHeight - 164 }}px">
+            <div class="header blue">
+                <img ui-sref="app.profil({ id: vm.owner.id })" src="main/assets/images/photo.png" ng-src="{{ vm.owner.avatar }}" alt="" class="circle avatar">
+                <img ng-show="vm.state === 'none'"
+                     ng-click="vm.subscribeWish()" 
+                     class="btn-go" src="main/assets/images/btn-participer-go.png" alt="">
+                <img ng-show="vm.state === 'pending'" 
+                     ng-click="vm.unPendingWish()" 
+                     class="btn-go" src="main/assets/images/btn-supprimer-participation.png" alt="">
+                <img ng-show="vm.state === 'contributor'"
+                     class="btn-go" src="main/assets/images/btn-supprimer-participation.png" alt="">
+                <img ng-show="vm.state === 'loading'"
+                     class="btn-go" src="main/assets/images/btn-supprimer-participation.png" alt="">
+                <div class="title">{{ vm.wish.title }}</div>
+                <div class="date">{{ vm.wish.date_start | cdate }}</div>
+                <div class="user">Postée par <strong>{{ vm.owner.username }}</strong></div>
+                <div class="contrib">
+                    <img class="icn" src="main/assets/images/participants2.png" alt="">
+                    {{ vm.wish.contributors }}
+                </div>
+                <div class="dist">
+                    <img ng-show="true" src="main/assets/images/en-ligne.png" alt="">
+                    {{ vm.selectedWish.user_range }}150m
+                </div>
+                <p></p>
+            </div>
+            <div ng-show="vm.state === 'owner' || vm.state === 'contributor'" class="tabs">
+                blabla
+
+            </div>
+            <div class="content white">
+                <h3>Participants :</h3>
+                <!--
+<div class="photo" item-height="250" item-width="100">
+<img src="../img/photo.png" ng-src="{{ vm.owner.avatar }}" alt="">
+<div>{{ vm.owner.first_name || vm.owner.username }}</div>
+</div>
+-->
+                <div class="photo" collection-repeat="user in vm.contributors"
+                     item-height="140" item-width="100">
+                    <img width="80" src="main/assets/images/photo.png" ng-src="{{ user.avatar }}">
+                    <div>{{ user.first_name || user.username }}</div>
+                </div>
+            </div>
+
+            <ul id="pending-list" ng-show="vm.isOwner" class="collection">
+                <h4>En attente</h4>
+                <li ng-repeat="user in vm.pendingsInfos" class="collection-item avatar">
+                    <img ng-src="{{ user.avatar }}" alt="" class="circle">
+                    <span class="title">{{ user.username }}</span>
+                    <a ng-click="vm.acceptPending(user)" class="secondary-content"><i class="mdi-action-done"></i></a>
+                </li>
+            </ul>
+        </ion-content>
+    </ion-content>
+</ion-view>

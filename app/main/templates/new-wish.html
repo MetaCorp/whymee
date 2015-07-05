@@ -1,0 +1,75 @@
+<ion-view view-title="Je veux">
+    <ion-content scroll="false" class="settings">
+        <div class="content">
+            <label class="item item-input new-wish-title">
+                <textarea ng-model="vm.wish.title" placeholder="Titre" type="text"></textarea>
+            </label>
+            <div class="newwish-input">
+                <span class="title">Avec</span>
+                <span class="content">
+                    <img ng-show="vm.male === false" ng-click="vm.male = true" src="main/assets/images/sex-male-normal.png" alt="">
+                    <img ng-show="vm.male === true" ng-click="vm.male = false" src="main/assets/images/sex-male-survol.png" alt="">
+                    <img ng-show="vm.female === false" ng-click="vm.female = true" src="main/assets/images/sex-female-normal.png" alt="">
+                    <img ng-show="vm.female === true" ng-click="vm.female = false" src="main/assets/images/sex-female-survol.png" alt="">
+                </span>
+            </div>
+            <div class="newwish-input">
+                <span class="title">Participants</span>
+                <span class="content">
+                    <input ng-model="vm.wish.contributors_max" type="text">
+                </span>
+            </div>
+            <div class="newwish-input">
+                <span class="title">Entre</span>
+                <span class="content">
+                    <input type="text" id="age-minmax" name="example_name" value="" />
+                    <input type="range" id="agemin" min="0" max="100" />
+                    <input type="range" id="agemax" min="0" max="100" />
+                </span>
+            </div>
+            <div class="datetime-input">
+                <div class="title1">Le</div>
+                <div class="content1">
+                    <input type="date" class="date"></div>
+                <div class="title2">A</div>
+            </div>
+            <div class="content2">
+                15:30
+            </div>
+            <div class="post-wish">
+                <img src="main/assets/images/btn-participer-copie.png" ng-click="vm.postWish()">
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input ng-model="vm.startIn" id="startIn" type="text" class="validate">
+                    <label for="startIn">Commence dans</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input ng-model="vm.duration" id="duration" type="text" class="validate">
+                    <label for="duration">Durée</label>
+                </div>
+            </div>
+        </div>
+        <!--
+<div class="row">
+<mb-datepicker
+date-format="YYYY-MM-DD"></mb-datepicker>
+</div>
+-->
+        <!--
+<div id="modalNow" class="modal">
+<div class="modal-content">
+<h4>Durée de mon envie</h4>
+<p>A bunch of text</p>
+</div>
+<div class="modal-footer">
+<a class=" modal-action modal-close waves-effect waves-green btn-flat">Annuler</a>
+<a class=" modal-action modal-close waves-effect waves-green btn-flat">Poster</a>
+</div>
+</div>
+-->
+    </ion-content>
+</ion-view>

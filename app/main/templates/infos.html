@@ -1,0 +1,39 @@
+<ion-view view-title="Informations">
+    <ion-content  scroll="false" class="settings">
+        <div class="content">
+            <label class="item item-input">
+                <span class="input-label">Prénom</span>
+                <input ng-model="vm.user.first_name" type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Nom</span>
+                <input ng-model="vm.user.last_name" type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Age</span>
+                <input ng-model="vm.user.age" type="text">
+            </label>
+            <div class="list">
+
+                <div class="item item-divider"> 
+                    Sexe
+                </div>
+
+                <ion-radio value="true"
+                           ng-value="'male'"
+                           ng-model="vm.user.sex">
+                    Homme
+                </ion-radio>
+                <ion-radio
+                           ng-value="'female'"
+                           ng-model="vm.user.sex">
+                    Femme
+                </ion-radio>
+
+            </div>
+            <div class="actions"> 
+                <div ng-click="vm.save()" class="btnDelete blue white-text">SAUVEGARDER</div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
