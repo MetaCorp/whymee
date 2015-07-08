@@ -20,8 +20,8 @@
 
         auth.$onAuth(function (authData) {
             if (authData) {
-                lastOnlineRef = Ref.child('users/' + authData.uid + '/lastOnline');
-                connectedRef = Ref.child('users/' + authData.uid + '/connected');
+                lastOnlineRef = Ref.child('users/' + authData.uid + '/infos/lastOnline');
+                connectedRef = Ref.child('users/' + authData.uid + '/infos/connected');
 
                 lastOnlineRef.onDisconnect().set(Firebase.ServerValue.TIMESTAMP);
 

@@ -17,9 +17,12 @@
             <button class="btn-login gray" ng-click="vm.passwordLogin()" ng-hide="createMode">Se connecter</button>
             <button class="btn-login purple" ng-click="createMode = true" ng-hide="createMode">S'inscrire</button>
             <div ng-hide="createMode" class="or">ou</div>
-            <button ng-hide="createMode" class="btn-login facebook" ng-click="vm.facebookLogin()" ng-hide="createMode">Connexion avec facebook</button>
-            <button class="btn-login purple" ng-cloak ng-show="createMode" ng-click="vm.createAccount()">Create Account</button>
-            <button class="btn-login gray" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
+            <button ng-hide="createMode" class="btn-login facebook" ng-click="vm.facebookLogin()" ng-hide="createMode">
+                <img class="logo-fb" src="main/assets/images/picto-facebook.png" alt="">
+                Connexion avec Facebook
+            </button>
+            <button class="btn-login purple" ng-cloak ng-show="createMode" ng-click="vm.createAccount()">Créer un compte</button>
+            <button class="btn-login gray" ng-cloak ng-show="createMode" ng-click="createMode = false">Annuler</button>
         </form>
 
     </ion-content>

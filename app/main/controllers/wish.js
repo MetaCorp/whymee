@@ -4,6 +4,8 @@ angular.module('main')
 
     var vm = this;
 
+    vm.tabState = 'contributors';
+    
     vm.user = Users.getInfos(user.uid);
     vm.pendings = Wishes.getPendings($stateParams.id);
     vm.contributors = Wishes.getContributors($stateParams.id);
@@ -30,7 +32,7 @@ angular.module('main')
                     vm.state = data;
                 });
 
-            uiGmapGoogleMapApi.then(function() {
+            uiGmapGoogleMapApi.then(function () {
                 vm.map = { 
                     center: { 
                         latitude: vm.wish.location.lat,

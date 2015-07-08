@@ -56,12 +56,12 @@ angular.module('main')
     };
 
     var subscribeWish = function(userId, wishId) {// deprecated TODO notif
-        //        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendings'), wishId);
     };
 
     var addPendingFriend = function(userId, friendId) {// TODO notif
-        //        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendingFriends'), friendId);
     };
 

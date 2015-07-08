@@ -50,7 +50,6 @@ ion-header-bar {
 
 ion-side-menu.left ion-header-bar {
     background-color: black !important;
-    background: url(../assets/images/picto-reglages.png);
 }
 
 ion-side-menu.left ion-header-bar .content {
@@ -128,7 +127,15 @@ ion-side-menu ion-header-bar .content {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 120px;
+    bottom: 370px;// TODO map height (120)
+}
+
+.map-container.newwish .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .wish-list {
@@ -146,6 +153,13 @@ label.new-wish-title textarea {
 
 }
 
+ion-content.scroll-content-false {
+    top: 44px;
+}
+
+ion-content.scroll-content-false.splash-screen {
+    top: 0;
+}
 
 ul.collection {
     margin: 0;
@@ -322,8 +336,6 @@ img.blur {
     margin-left: 0;
 }
 
-
-
 ion-side-menu ion-item img {
     position: relative;
     left: -20px;
@@ -332,7 +344,7 @@ ion-side-menu ion-item img {
 }
 
 .title.header-item {
-    left: 20px !important;
+    left: 40px !important;
     text-align: center !important;
 }
 
@@ -361,21 +373,20 @@ ion-side-menu ion-item img {
 }
 .wish-content .header .title {
     position: absolute;
-    left: 100px;
-    top: 13px;
+    left: 110px;
+    top: 30px;
     color: white;
     font-size: large;
-    position: relative;
 }
 .wish-content .header .date {
     position: absolute;
     left: 110px;
-    top: 65px;
+    top: 75px;
 }
 .wish-content .header .user {
     position: absolute;
     left: 110px;
-    top: 84px;
+    top: 94px;
     font-weight: 300;
     color: #bcf3ff;
 }
@@ -388,7 +399,7 @@ ion-side-menu ion-item img {
 .wish-content .header .contrib {
     position: absolute;
     left: 285px;
-    top: 65px;
+    top: 75px;
 }
 .wish-content .contrib {
     width: 100%;
@@ -413,6 +424,27 @@ ion-side-menu ion-item img {
 .wish-content .collection-repeat-container {
     position: relative;
     top: 20px;
+}
+.wish-content .tabs2 {
+    position: relative;
+    background-color: lightgray;
+    text-align: center;
+    height: 35px;
+}
+.wish-content .tabs2 .tab.selected {
+    background-color: gray;
+}
+.wish-content .tabs2.contributor .tab {
+    color: white;
+    padding: 8px 40px;
+    display: inline-block;
+    font-size: medium;
+}
+.wish-content .tabs2.owner .tab {
+    color: white;
+    padding: 8px 20px;
+    display: inline-block;
+    font-size: medium;
 }
 
 .wish-overlay {
@@ -442,8 +474,9 @@ ion-side-menu ion-item img {
     top: 0;
     left: 0;
     right: 0;
-    height: 200px;
+    height: 330px;
     text-align: center;
+    overflow: hidden;
 }
 
 .header-pic img.circle {
@@ -451,6 +484,12 @@ ion-side-menu ion-item img {
     margin: 0 auto;
     height: 100%;
     width: auto;
+}
+
+.header-pic img.msg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .image-cropper {
@@ -665,12 +704,22 @@ form.login {
 }
 .datetime-input .content1 {
     float: left;
+    height: 69px;
     position: relative;
     left: 0;
     right: 100px;
     border-right: 1px solid lightgray;
+    width: 180px;
 }
-.datetime-input .title2 {
+.datetime-input .content1 input {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+.datetime-input .content1 .title2 {
+    position: absolute;
+    right: 15px;
+    top: 25px;
     color: #3d3d3d;
     font: 400 17px Roboto;
     height: 100%;
@@ -700,11 +749,19 @@ form.login {
 }
 
 .post-wish {
+    padding-top: 25px;
     text-align: center;
+    border-top: 1px solid lightgray;
 }
 .post-wish img {
     width: 70px;
-    background: url(../assets/images/participants2.png);
+}
+.post-wish .extra {
+    margin-top: 5px;
+}
+.post-wish .extra .picto {
+    width: 15px;
+    margin-right: 5px;
 }
 
 .icn { 
@@ -714,7 +771,7 @@ form.login {
 .btn-go {
     float: right;
     position: relative;
-    top: -55px;
+    top: -62px;
     right: 12px;
 }
 
@@ -774,6 +831,115 @@ ul.chat-coll li .action {
     font: 300 11px / 36px Roboto;
 }
 
+.Profil .row2 {
+    position: relative;
+    font: 300 18.27px / 36px Roboto;
+    padding: 12px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.Profil .row2.header {
+    height: 70px;
+    border-top: 1px solid #dcdcdc;
+}
+.Profil .row2.stats {
+    padding-top: 14px;
+    height: 63px;
+}
+.Profil .row2 img.online {
+    float: left;
+    position: relative;
+    top: 14px;
+    left: 10px;
+}
+.Profil .row2 img.icon {
+    float: left;
+    position: relative;
+    top: 14px;
+    left: 8px;
+}
+.Profil .row2 .username {
+    position: relative;
+    left: 22px;
+}
+.Profil .row2 .location {
+    float: left;
+    position: relative;
+    top: -17px;
+    left: 34px;
+    font-size: small;
+}
+.Profil .row2 .stats.wish {
+    float: left;
+}
+.Profil .row2 .stats.rate {
+    position: absolute;
+    right: 20px;
+}
+.Profil .row2.about {
+    height: 200px;
+}
+.Profil .row2.about .title {
+    position: absolute;
+    top: 23px;
+    left: 55px;
+}
+
+.splash-screen {
+    background: url(../assets/images/login-bg.png);
+    position: absolute;
+    top: 0;
+    text-align: center;
+}
+
+.splash-screen img {
+    position: relative;
+}
+
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.anime-circle {
+    width: 100px;
+}
+
+.rotating {
+    -webkit-animation: rotating 2s linear infinite;
+}
+
+.loading-container .loading {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 20px;
+}
+.loading-container.active {
+    background-color: transparent;
+}
+
+input {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+.logo-fb {
+    position: relative;
+    top: 6px;
+    float: left;
+    left: 10px;
+}
+
+.logo-header {
+    position: relative;
+    top: 3px;
+    left: -8px;
+}
 
 /*======= Map Styling - CARE ============*/
 .gmnoprint a, .gmnoprint span {

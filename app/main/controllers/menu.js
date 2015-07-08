@@ -27,4 +27,8 @@ angular.module('main')
 
         Users.checkNotif(vm.user.id, notif.$id);
     };
+    
+    vm.getUser = function(userId) {
+        return Users.getInfos(userId);  
+    };
 });

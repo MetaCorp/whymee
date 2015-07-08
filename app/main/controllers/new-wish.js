@@ -1,28 +1,28 @@
 'use strict';
 angular.module('main')
-    .controller('NewWishCtrl', function($state, user, Users, Wishes, Geocode, Chats, geolocation) {
+    .controller('NewWishCtrl', function($state, user, Users, Wishes, Geocode, Chats, geolocation, uiGmapGoogleMapApi) {
 
     var vm = this;
-//    $('#age-minmax').ionRangeSlider({
-//        type: 'double',
-//        min: 1000,
-//        max: 5000,
-//        from: 2000,
-//        to: 4000,
-//        step: 100,
-//        onStart: function (data) {
-//            console.log(data);
-//        },
-//        onChange: function (data) {
-//            console.log(data);
-//        },
-//        onFinish: function (data) {
-//            console.log(data);
-//        },
-//        onUpdate: function (data) {
-//            console.log(data);
-//        }
-//    });
+    //    $('#age-minmax').ionRangeSlider({
+    //        type: 'double',
+    //        min: 1000,
+    //        max: 5000,
+    //        from: 2000,
+    //        to: 4000,
+    //        step: 100,
+    //        onStart: function (data) {
+    //            console.log(data);
+    //        },
+    //        onChange: function (data) {
+    //            console.log(data);
+    //        },
+    //        onFinish: function (data) {
+    //            console.log(data);
+    //        },
+    //        onUpdate: function (data) {
+    //            console.log(data);
+    //        }
+    //    });
 
     vm.user = Users.getInfos(user.uid);
 
@@ -30,6 +30,8 @@ angular.module('main')
 
     vm.duration = 60;
     vm.startIn = 0;
+
+    vm.mapOpen = false;
 
     vm.wish = {
         title: '',
@@ -50,11 +52,42 @@ angular.module('main')
         contributors_max: 5,
         chat: null,
         id: null,
-        contributors: 1
+        contributors: 1,
+        nb_wish: 0,
+        score: 0// TODO update nb_wish and score in service
     };
 
     vm.male = true;
     vm.female = true;
+
+    vm.user.$loaded(function() {
+        uiGmapGoogleMapApi.then(function() {
+            vm.map = { 
+                center: { 
+                    latitude: vm.wish.location.lat,
+                    longitude: vm.wish.location.long 
+                }, 
+                zoom: 16,
+                bounds: {},
+                options: {
+                    disableDefaultUI: true   
+                }
+            };
+
+            vm.marker =
+                {
+                coords: {
+                    latitude: vm.wish.location.lat,
+                    longitude: vm.wish.location.long
+                },
+                id: 0,
+                options: {
+                    icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
+                }
+            };
+
+        });
+    });
 
     vm.sexChanged = function() {
         if (vm.male && vm.female)

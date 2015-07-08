@@ -1,15 +1,27 @@
-<ion-view view-title="Profil">
+<ion-view view-title="Profil" class="Profil">
     <ion-content scroll="false">
         <div class="header-pic">
-            <img class="avatar" ng-src="{{ vm.profil.avatar }}" alt="">
-            <!--
-<div class="image-cropper">
-<img class="rounded" ng-src="{{ vm.profil.avatar }}" alt="">
-</div>
--->
+            <img class="avatar" src="main/assets/images/photo.png" ng-src="{{ vm.profil.avatar }}" alt="">
+            <img src="main/assets/images/btn-amis-deja-message.png" alt="">
         </div>
-        <div class="row">
-            <h2>{{ vm.profil.username }}</h2>
+        <div class="row2 header">
+            <img class="online" src="main/assets/images/en-ligne.png" alt="">
+            <div class="username"><strong>{{ vm.profil.username }}</strong>, {{ vm.profil.age }} ans</div>
+            <div class="location">à {{ vm.profil.city }}</div>
+        </div>
+        <div class="row2 stats">
+            <div class="stats wish">
+                <img src="main/assets/images/picto-envies2.png" alt="">
+                <strong>{{ vm.profil.nb_wish }}</strong> Envies organisées
+            </div>
+            <div class="stats rate">
+                <img src="main/assets/images/picto-note.png" alt="">
+                <strong>{{ vm.profil.rate }}</strong> points
+            </div>
+        </div>
+        <div class="row2 about">
+            <img class="icon" src="main/assets/images/picto-a-propos.png" alt="">
+            <div class="title">A propos</div>
         </div>
         <a ng-hide="vm.isPending" ng-click="vm.addFriend()" class="waves-effect waves-light btn">Ajouter</a>
         <a ng-show="vm.isFriend" ng-click="vm.chat()" class="waves-effect waves-light btn">Messages</a>

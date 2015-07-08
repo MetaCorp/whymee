@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('LoginCtrl', function(Auth, $state, $q, $ionicHistory, Ref, $timeout, User, Users) {
+    .controller('LoginCtrl', function($state, $q, $ionicHistory, Auth, Ref, $timeout, User, Users) {
 
     var vm = this;
 
@@ -125,7 +125,7 @@ angular.module('main')
 
     function showError(err) {
         console.log(err);// TODO Toast err
-        //        Materialize.toast(err, 4000);
+                Materialize.toast(err, 4000);
     }
 
 });

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('AroundCtrl', function($state, user, Users, Wishes, uiGmapGoogleMapApi, geolocation, Geocode, Device) {
+    .controller('AroundCtrl', function($timeout, $state, user, Users, Wishes, uiGmapGoogleMapApi, geolocation, Geocode, Device) {
 
     var vm = this;
 
@@ -21,8 +21,10 @@ angular.module('main')
     vm.markers = [];
 
     vm.markerClicked = false;
-    
+
     vm.currentDate = new Date();
+
+    vm.mapLoaded = false;
 
     var wishStateDico = {};
 
@@ -33,6 +35,7 @@ angular.module('main')
         wishStateDico[wish.id] = 'loading';
         Wishes.addPending(wish.id, user.uid).then(function() {
             wishStateDico[wish.id] = 'pending';
+            Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         });
 
         Users.sendNotif(wish.owner, { 
@@ -58,8 +61,10 @@ angular.module('main')
         return Users.getInfos(userId);   
     };
 
-    vm.selectWish = function(wish) {
-        $state.go('app.wish', { id: wish.id});
+    vm.selectWish = function(wish) {// TODO hum
+        $timeout(function() {
+            $state.go('app.wish', { id: wish.id});
+        }, 0);
     };
 
     vm.getWishState = function(wishId) {
@@ -72,8 +77,7 @@ angular.module('main')
     };
 
     var markerClick = function(data) {
-        console.log('markerClick:', data);
-        var wishClicked = $.grep(vm.wishes, function(wish){ return wish.id === data.key; })[0];
+        var wishClicked = $.grep(vm.wishes, function(wish) { return wish.id === data.key; })[0];
         if (wishClicked === vm.selectedWish) return;
 
         vm.selectedWish = wishClicked;
@@ -87,7 +91,7 @@ angular.module('main')
         else
             return vm.user.sex === sex;
     };
-    
+
     vm.checkDate = function(date) {
         return date > vm.currentDate;
     };
@@ -188,7 +192,7 @@ angular.module('main')
                             zoom: 16,
                             bounds: {},
                             options: {
-                                disableDefaultUI: false   
+                                disableDefaultUI: true
                             },
                             events: {
                                 dragstart: function () {
@@ -226,6 +230,9 @@ angular.module('main')
                                 }
                             });
                         }
+                        $timeout(function() {
+                            vm.mapLoaded = true;
+                        }, 1000);
                     }); 
                 });
             }).

@@ -1,23 +1,28 @@
 <ion-view view-title='<img class="title-image" src="main/assets/images/logo.png" />' hide-back-button="true">
-    <ion-content scroll="false">
+    <ion-content ng-hide="vm.mapLoaded" scroll="false" class="splash-screen">
+        <img src="main/assets/images/logo-tourne.png" alt="" class="rotating" ng-style="{ top: vm.screenHeight / 2 - 44 + 'px' }">
+        <div class="anim-circle"></div>
+    </ion-content>
+    <ion-content ng-if="vm.mapLoaded" scroll="false">
         <div ng-show="vm.selectedWish" ng-style="vm.overlayY" class="wish-overlay">
             <ul class="z-depth-1 wish-coll">
                 <li ng-click="vm.selectWish(vm.selectedWish)">
                     <div class="container">
-                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <img src="main/assets/images/photo.png" 
+                             ng-src="{{ ::vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
                         <div class="title">
-                            {{ vm.selectedWish.title }}
+                            {{ ::vm.selectedWish.title }}
                         </div>
                         <div class="dist">
                             <img ng-show="true" src="main/assets/images/en-ligne.png" alt="">
-                            {{ vm.selectedWish.user_range }}150m
+                            {{ ::vm.selectedWish.user_range }}150m
                         </div>
                         <div class="date">
                             {{ vm.selectedWish.date_start | cdate }}
                         </div>
                         <div class="contrib">
                             <img src="main/assets/images/picto-participants-copie.png" alt="">
-                            {{ vm.selectedWish.contributors }}
+                            {{ ::vm.selectedWish.contributors }}
                         </div>
                         <img ng-show="vm.getWishState(vm.selectedWish.id) === 'none'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
@@ -30,18 +35,22 @@
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
                         <img ng-show="vm.getWishState(vm.selectedWish.id) === 'loading'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-chargement.png" alt="">
+                             class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
                 </li>
             </ul>
         </div>
         <div class="map-container">
-            <ui-gmap-google-map ng-click="vm.mapClick($event)" options="vm.map.options" refresh="true" center="vm.map.center" zoom="vm.map.zoom" events="vm.map.events">
+            <ui-gmap-google-map ng-click="vm.mapClick($event)" options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events">
+<!--
                 <ui-gmap-marker ng-repeat="marker in vm.markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
                 </ui-gmap-marker>
+-->
+                <ui-gmap-markers models="vm.markers" coords="'coords'" options="'options'">
+                </ui-gmap-markers>
             </ui-gmap-google-map>
         </div>
-        <ion-content class="wish-list" scroll="true" style="top: {{ vm.screenHeight - 30 - 30 }}px">
+        <ion-content class="wish-list" scroll="true" style="top: {{ ::vm.screenHeight - 30 - 30 }}px">
             <div class="header">
                 <div class="arrow">
                     <img src="main/assets/images/Rectangle-1.png" alt="">
@@ -52,9 +61,9 @@
                     ng-click="vm.selectWish(wish)" 
                     ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish.date_start)">
                     <div class="container">
-                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <img src="main/assets/images/photo.png" ng-src="{{ ::vm.getUser(wish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
                         <div class="title">
-                            {{ wish.title }}
+                            {{ ::wish.title }}
                         </div>
                         <div class="dist" ng-class="{ deco: !vm.user.connected && vm.user.id !== wish.owner }">
                             <img ng-show="vm.user.connected || vm.user.id === wish.owner"
@@ -62,11 +71,11 @@
                             {{ wish.user_range }}150m
                         </div>
                         <div class="date">
-                            {{ wish.date_start | cdate }}
+                            {{ ::wish.date_start | cdate }}
                         </div>
                         <div class="contrib">
                             <img src="main/assets/images/picto-participants-copie.png" alt="">
-                            {{ wish.contributors }}
+                            {{ ::wish.contributors }}
                         </div>
                         <img ng-show="vm.getWishState(wish.id) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
                         <img ng-show="vm.getWishState(wish.id) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">

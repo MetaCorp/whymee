@@ -27,6 +27,7 @@
         "StatusBar": false,
         "$": false,
         "Worker": false,
-        "Date": false
+        "Date": false,
+        "Materialize": false
     }
 }

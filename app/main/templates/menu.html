@@ -15,7 +15,7 @@
                 </button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <span menu-toggle="right" class="badge-notif purple">{{ vm.notifications.length }} </span>
+                <span ng-show="vm.notifications.length > 0" menu-toggle="right" class="badge-notif purple">{{ vm.notifications.length }}</span>
             </ion-nav-buttons>
         </ion-nav-bar>
 
@@ -28,11 +28,11 @@
     <ion-side-menu side="left" class="left">
 
         <!-- menu header -->
-        <ion-header-bar class="bar-stable">
+        <ion-header-bar menu-close ui-sref="app.profil({ id: vm.user.id })" class="bar-stable">
             <img class="bg-img blur" ng-src="{{ vm.user.avatar }}" src="http://www.google.fr/url?source=imglanding&ct=img&q=http://assets.hellocoton.fr/avatars/square-256-106437-c4d98877da8e18898b10cdade03fcc21.png&sa=X&ved=0CAkQ8wc4N2oVChMIpOLVoq6HxgIViCvbCh2SWgDU&usg=AFQjCNHE7fCiIU5xycavsswxEc5xfl9eHg" alt="">
             <img class="circle" ng-src="{{ vm.user.avatar }}" src="http://www.google.fr/url?source=imglanding&ct=img&q=http://assets.hellocoton.fr/avatars/square-256-106437-c4d98877da8e18898b10cdade03fcc21.png&sa=X&ved=0CAkQ8wc4N2oVChMIpOLVoq6HxgIViCvbCh2SWgDU&usg=AFQjCNHE7fCiIU5xycavsswxEc5xfl9eHg" alt="" width="80" height="80">
             <h1 class="content">{{ vm.user.first_name }}</h1>
-            <span menu-close ui-sref="app.profil({ id: vm.user.id })">Voir le profil</span>
+            <span>Voir le profil</span>
         </ion-header-bar>
 
         <!-- menu content -->
@@ -77,7 +77,8 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item ng-click="vm.goNotif(notif)" class="notif" ng-repeat="notif in vm.notifications" nav-clear menu-close>
+                <ion-item ng-click="vm.goNotif(notif)" ng-class="{ notifnew: notif.new }" class="notif" ng-repeat="notif in vm.notifications" nav-clear menu-close>
+<!--                    <img ng-src="{{ vm.getUser(notif.user).avatar }}" alt="" class="cirle">-->
                     <span ng-show="notif.new">+ </span>{{ notif.title }}
                 </ion-item>
             </ion-list>
