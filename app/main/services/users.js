@@ -170,10 +170,10 @@ angular.module('main')
     var getIdFromHistoric = function(userId, id) {
         return $firebaseObject(Ref.child('users/' + userId + '/historic/' + id));   
     };
-    //
-    //    var getIdFromWishes = function(userId, id) {
-    //        return $firebaseObject(Ref.child('users/' + userId + '/wishes/' + id));   
-    //    };
+
+    var getIdFromWishes = function(userId, id) {
+        return $firebaseObject(Ref.child('users/' + userId + '/wishes/' + id));   
+    };
 
     var getNotif = function(userId, id) {
         return $firebaseObject(Ref.child('users/' + userId + '/notifications/' + id));   
@@ -228,6 +228,18 @@ angular.module('main')
         });
     };
 
+    var deleteChat = function(userId, chatId) {
+        FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/chats'), chatId);
+    };
+
+    var getChatsIds = function(userId) {
+        return $firebaseArray(Ref.child('users/' + userId + '/chats'));
+    };
+
+    var getIdFromChat = function(userId, id) {
+        return $firebaseObject(Ref.child('users/' + userId + '/chats/' + id));   
+    };
+
     return {
         get: getUser,
         getInfos: getUserInfos,
@@ -255,6 +267,10 @@ angular.module('main')
         deleteWishFromHistoric: deleteWishFromHistoric,
         cancelWish: cancelWish,
         getWishState: getWishState,
-        updateGeoloc: updateGeoloc
+        updateGeoloc: updateGeoloc,
+        deleteChat: deleteChat,
+        getChatsIds: getChatsIds,
+        getIdFromChat: getIdFromChat,
+        getIdFromWishes: getIdFromWishes
     };
 });

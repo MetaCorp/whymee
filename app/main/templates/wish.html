@@ -46,6 +46,8 @@
                 <span ng-click="vm.tabState = 'messages'" 
                       ng-class="{ selected: vm.tabState = 'messages'}" class="tab">Messages</span>
             </div>
+            <div ui-view></div>
+<!--
             
             <div ng-show="vm.tabState === 'contributors'" class="content white">
                 contributors
@@ -70,6 +72,7 @@
                     <a ng-click="vm.acceptPending(user)" class="secondary-content"><i class="mdi-action-done"></i></a>
                 </li>
             </ul>
+-->
         </ion-content>
     </ion-content>
 </ion-view>

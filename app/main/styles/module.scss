@@ -689,6 +689,7 @@ form.login {
 }
 
 .datetime-input {
+    position: relative;
     height: 70px;
     border-top: 1px solid lightgray;
 }
@@ -713,7 +714,7 @@ form.login {
 }
 .datetime-input .content1 input {
     position: absolute;
-    top: 15px;
+    top: 10px;
     left: 20px;
 }
 .datetime-input .content1 .title2 {
@@ -723,6 +724,12 @@ form.login {
     color: #3d3d3d;
     font: 400 17px Roboto;
     height: 100%;
+}
+.datetime-input .content2 {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    width: 100px;
 }
 
 .newwish-input {
@@ -801,30 +808,33 @@ form.login {
 .blue { background-color: #46bdd7; }
 .white-text { color: white; }
 
-ul.chat-coll li {
+ion-list.chat-coll ion-item {
     position: relative;
     height: 120px;
     border-bottom: 1px solid #dcdcdc;
 }
-ul.chat-coll li .title {
+ion-list.chat-coll ion-item .title {
     position: absolute;
     top: 40px;
     left: 110px;
     font: 500 16.58px / 17.497px Roboto;
 }
-ul.chat-coll li img.avatar {
+ion-list.chat-coll ion-item img.avatar {
     position: absolute;
     left: 20px;
     top: 25px;
 }
-ul.chat-coll li .extra {
+ion-list.chat-coll ion-item .item-content {
+    height: 100%;
+}
+ion-list.chat-coll ion-item .extra {
     position: absolute;
     left: 110px;
     top: 53px;
     font: 300 11px / 36px Roboto;
     color: gray;
 }
-ul.chat-coll li .action {
+ion-list.chat-coll ion-item .action {
     position: absolute;
     top: 48px;
     right: 20px;

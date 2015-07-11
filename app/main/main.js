@@ -71,6 +71,15 @@ angular.module('main', [
             }
         }
     })
+        .stateAuthenticated('app.wish.chat', {
+        url: '/chat',
+        views: {
+            'menuContent': {
+                templateUrl: 'main/templates/chat.html',
+                controller: 'ChatCtrl as vm'
+            }
+        }
+    })
 
         .stateAuthenticated('app.wishes', {
         url: '/wishes',

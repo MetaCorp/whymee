@@ -59,7 +59,7 @@
             <ul class="wish-coll">
                 <li ng-repeat="wish in vm.wishes | orderBy: 'date_start' : true"
                     ng-click="vm.selectWish(wish)" 
-                    ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish.date_start)">
+                    ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish)">
                     <div class="container">
                         <img src="main/assets/images/photo.png" ng-src="{{ ::vm.getUser(wish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
                         <div class="title">

@@ -120,7 +120,7 @@ angular.module('main')
         $ionicHistory.nextViewOptions({
             disableBack: true
         });
-        $state.go('app.intro');
+        $state.go('app.around');// TODO Intro
     }
 
     function showError(err) {

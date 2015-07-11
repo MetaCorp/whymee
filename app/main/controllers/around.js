@@ -92,8 +92,11 @@ angular.module('main')
             return vm.user.sex === sex;
     };
 
-    vm.checkDate = function(date) {
-        return date > vm.currentDate;
+    vm.checkDate = function(wish) {
+//        console.log('\nwish.title:', wish.title);
+//        console.log('vm.currentDate:', vm.currentDate);
+//        console.log('date:', new Date(wish.date_start));
+        return new Date(wish.date_start) < vm.currentDate;
     };
 
     vm.mapClick = function(event) {

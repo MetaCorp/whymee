@@ -3,15 +3,18 @@
         <div ng-show="vm.chats.length === 0">
             Aucun message, créez ou ralliez une envie!
         </div>
-        <ul class="chat-coll">
-            <li ng-click="vm.selectChat(chat)" ng-repeat="chat in vm.chats">
+        <ion-list can-swipe="true" class="chat-coll">
+            <ion-item ng-click="vm.selectChat(chat)" ng-repeat="chat in vm.chats">
+                <ion-option-button class="ion-minus-circled"
+                                   ng-click="vm.deleteChat(chat.id)">
+                </ion-option-button>
                 <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(chat.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
                 <div class="title">{{ chat.title }}</div>
                 <div ng-show="chat.last" class="extra">
                     {{ vm.getUser(chat.last.owner).first_name }}: {{ chat.last.text }}
                 </div>
                 <img class="action" src="main/assets/images/btn-option.png" alt="">
-            </li>
-        </ul>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

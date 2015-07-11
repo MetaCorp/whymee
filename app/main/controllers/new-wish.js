@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('NewWishCtrl', function($state, user, Users, Wishes, Geocode, Chats, geolocation, uiGmapGoogleMapApi) {
+    .controller('NewWishCtrl', function($state, $ionicHistory, user, Users, Wishes, Geocode, Chats, geolocation, uiGmapGoogleMapApi) {
 
     var vm = this;
     //    $('#age-minmax').ionRangeSlider({
@@ -32,6 +32,8 @@ angular.module('main')
     vm.startIn = 0;
 
     vm.mapOpen = false;
+
+    vm.wishDate = new Date();
 
     vm.wish = {
         title: '',
@@ -101,10 +103,41 @@ angular.module('main')
         console.log('vm.wish.sex:', vm.wish.sex);
     };
 
+    var toWish = function(wishId) {
+        vm.wish = {
+            title: '',
+            sex: 'both',
+            age_min: 0,
+            age_max: 99,
+            date_start: new Date(),
+            date_end: new Date(new Date().getTime() + (5 * 60000)).getTime(),
+            date_post: null,
+            location: {
+                lat: 48.88800,
+                long: 2.34151,
+                address: null,
+                country: null,
+                region: null
+            },
+            owner: user.uid,
+            contributors_max: 5,
+            chat: null,
+            id: null,
+            contributors: 1,
+            nb_wish: 0,
+            score: 0
+        };
+
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go('app.wish', { id: wishId });
+    };
+
     vm.postWish = function() {
         vm.wish.date_post = Date.now();
 
-        vm.wish.date_start = new Date(new Date().getTime() + (vm.startIn * 60000)).getTime();
+        vm.wish.date_start = vm.wishDate.getTime();//new Date(new Date().getTime() + (vm.startIn * 60000)).getTime();
         vm.wish.date_end = new Date(new Date().getTime() + ((vm.startIn + vm.duration) * 60000)).getTime();
 
         geolocation.getLocation().then(function(data) {
@@ -126,15 +159,15 @@ angular.module('main')
                     vm.wish.chat = ref.key();
                     Wishes.add(vm.wish).then(function(ref) {
                         Users.addWish(user.uid, ref.key()).then(function() {
-                            $state.go('app.wish', { id: ref.key() });
+                            toWish(ref.key());
                         });
                     });
                 });
             }).
             error(function(data) {
                 console.log('Geocode error data:', data);
-
             }); 
         });
     };
+
 });

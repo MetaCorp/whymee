@@ -27,4 +27,6 @@ angular.module('main')
         Users.addFriend(friend.id, user.uid);
         Users.confirmFriend(user.uid, friend.id);
     };
+    
+    // TODO display pending friends
 });

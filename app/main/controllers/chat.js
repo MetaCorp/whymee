@@ -2,6 +2,8 @@
 angular.module('main')
     .controller('ChatCtrl', function($state, $stateParams, user, Users, Chats, Device) {
 
+    console.log('Chat controller instanciated!');
+    
     var vm = this;
 
     vm.user = Users.getInfos(user.uid);

@@ -33,11 +33,19 @@ angular.module('main')
                 case 'child_added':
                     Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
                         console.log('child added:', data);
-                        vm.wishes.push(Wishes.getInfos(data.$value));
+                        if (data.$value !== null) {
+                            Wishes.getInfos(data.$value).$loaded(function(data) {
+                                vm.wishes.push(data); 
+                            });
+                        }
                     });
                     break;
                 case 'child_removed':
                     console.log('event:', event);
+                    Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
+                        var index = vm.wishes.indexOf(data);
+                        vm.wishes.splice(index, 1);
+                    });
                     break;
             }
         });
@@ -51,8 +59,8 @@ angular.module('main')
             console.log('data:', data);
             contribDico[vm.historic[i].id] = data;            
         }
-        
-        
+
+
         for(var i = 0; i < vm.historic.length; i++) {
             Wishes.getContributorsInfos(vm.historic[i].id).then(ret);
         }
@@ -62,11 +70,19 @@ angular.module('main')
                 case 'child_added':
                     Users.getIdFromHistoric(user.uid, event.key).$loaded(function(data) {
                         console.log('child added:', data);
-                        vm.historic.push(Wishes.getInfos(data.$value));
+                        if (data.$value !== null) {
+                            Wishes.getInfos(data.$value).$loaded(function(data) {
+                                vm.historic.push(data); 
+                            });
+                        }
                     });
                     break;
                 case 'child_removed':
                     console.log('event:', event);
+                    Users.getIdFromHistoric(user.uid, event.key).$loaded(function(data) {
+                        var index = vm.historic.indexOf(data);
+                        vm.historic.splice(index, 1);
+                    });
                     break;
             }
         });
@@ -92,7 +108,7 @@ angular.module('main')
 
     vm.cancelWish = function(wish) {
         vm.wishes.splice(vm.wishes.indexOf(wish), 1);
-        Users.cancelWish(user.uid, wish);  
+        Users.cancelWish(user.uid, wish);
     };
 
     vm.getContributors = function(wishId) {

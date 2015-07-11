@@ -22,14 +22,18 @@
             <div class="newwish-input">
                 <span class="title">Entre</span>
                 <span class="content">
-                    <input type="text" id="age-minmax" name="example_name" value="" />
+                    <input type="text" id="age-minmax" value="" />
                 </span>
             </div>
             <div class="datetime-input">
                 <div class="title1">Le</div>
                 <div class="content1">
-                    <input type="date" class="date">
+                    <input ng-model="vm.wishDate" type="date" class="date">
                     <div class="title2">A</div>
+                </div>
+                <div class="content2">
+                    <input type="text" id="time-hour" 
+                    value="{{ vm.wishDate.getHours() + ':' + vm.wishDate.getMinutes() }}" />
                 </div>
             </div>
             <div class="post-wish">
