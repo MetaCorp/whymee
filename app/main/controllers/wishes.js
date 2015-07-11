@@ -42,10 +42,11 @@ angular.module('main')
                     break;
                 case 'child_removed':
                     console.log('event:', event);
-                    Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
+                    /*Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
                         var index = vm.wishes.indexOf(data);
-                        vm.wishes.splice(index, 1);
-                    });
+                        console.log('splice:', data);
+                        //vm.wishes.splice(index, 1);
+                    });*/
                     break;
             }
         });
@@ -79,10 +80,12 @@ angular.module('main')
                     break;
                 case 'child_removed':
                     console.log('event:', event);
+                    /*
                     Users.getIdFromHistoric(user.uid, event.key).$loaded(function(data) {
                         var index = vm.historic.indexOf(data);
-                        vm.historic.splice(index, 1);
-                    });
+                        console.log('splice:', data);
+                        //vm.historic.splice(index, 1);
+                    });*/
                     break;
             }
         });

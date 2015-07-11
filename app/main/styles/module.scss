@@ -102,6 +102,11 @@ ion-side-menu.left ion-header-bar .bg-img {
     bottom: 0;
     width: 275px;
 }
+ion-side-menu.left ion-item badge-notif {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 
 ion-side-menu ion-header-bar .content {
     font-size: medium;
@@ -949,6 +954,12 @@ input {
     position: relative;
     top: 3px;
     left: -8px;
+}
+
+.profil-action {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
 }
 
 /*======= Map Styling - CARE ============*/

@@ -93,9 +93,9 @@ angular.module('main')
     };
 
     vm.checkDate = function(wish) {
-//        console.log('\nwish.title:', wish.title);
-//        console.log('vm.currentDate:', vm.currentDate);
-//        console.log('date:', new Date(wish.date_start));
+        //        console.log('\nwish.title:', wish.title);
+        //        console.log('vm.currentDate:', vm.currentDate);
+        //        console.log('date:', new Date(wish.date_start));
         return new Date(wish.date_start) < vm.currentDate;
     };
 
@@ -218,20 +218,36 @@ angular.module('main')
                         ];
 
                         for(var i = 0; i < vm.wishes.length; i++) {
-                            vm.markers.push({
-                                coords: {
-                                    latitude: vm.wishes[i].location.lat,
-                                    longitude: vm.wishes[i].location.long
-                                },
-                                id: vm.wishes[i].id,
-                                options: {
-                                    labelContent: '',
-                                    icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
-                                },
-                                events: {
-                                    click: markerClick
-                                }
-                            });
+                            if (vm.wishes[i].owner !== user.uid)
+                                vm.markers.push({
+                                    coords: {
+                                        latitude: vm.wishes[i].location.lat,
+                                        longitude: vm.wishes[i].location.long
+                                    },
+                                    id: vm.wishes[i].id,
+                                    options: {
+                                        labelContent: '',
+                                        icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
+                                    },
+                                    events: {
+                                        click: markerClick
+                                    }
+                                });
+                            else
+                                vm.markers.push({
+                                    coords: {
+                                        latitude: vm.wishes[i].location.lat,
+                                        longitude: vm.wishes[i].location.long
+                                    },
+                                    id: vm.wishes[i].id,
+                                    options: {
+                                        labelContent: '',
+                                        icon: 'main/assets/images/picto-geolocalisation-perso.png'
+                                    },
+                                    events: {
+                                        click: markerClick
+                                    }
+                                });
                         }
                         $timeout(function() {
                             vm.mapLoaded = true;

@@ -53,6 +53,7 @@
                 <ion-item nav-clear menu-close ui-sref="app.chats">
                     <img src="main/assets/images/picto-messages.png" alt="">
                     Messages
+                    <span ng-show="vm.newChat" menu-toggle="right" class="badge-notif purple">{{ vm.newChat || 0 }}</span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.friends">
                     <img src="main/assets/images/picto-amis.png" alt="">
@@ -78,7 +79,7 @@
         <ion-content>
             <ion-list>
                 <ion-item ng-click="vm.goNotif(notif)" ng-class="{ notifnew: notif.new }" class="notif" ng-repeat="notif in vm.notifications" nav-clear menu-close>
-<!--                    <img ng-src="{{ vm.getUser(notif.user).avatar }}" alt="" class="cirle">-->
+<!--                    <img ng-src="{{ vm.getUser(notif.user).avatar }}" alt="" class="cirle avatar">-->
                     <span ng-show="notif.new">+ </span>{{ notif.title }}
                 </ion-item>
             </ion-list>

@@ -1,16 +1,30 @@
 <ion-view view-title='<img class="logo-header" src="main/assets/images/picto-amis.png">Amis'>
     <ion-content>
-        <ul class="collection">
-            <li ng-click="vm.selectFriend(friend)" ng-repeat="friend in vm.pendingFriends" class="collection-item avatar">
-                <img ng-src="{{ friend.avatar }}" alt="" class="circle">
-                <span class="title">{{ friend.username }} (en attente)</span>
-                <a ng-click="vm.confirmFriend(friend)" class="secondary-content"><i class="mdi-action-grade"></i></a>
-            </li>
-            <li ng-click="vm.selectFriend(friend)" ng-repeat="friend in vm.friends" class="collection-item avatar">
+        <ion-list can-swipe="true" class="chat-coll">
+            <div class="item item-divider">
+                En attente
+            </div>
+            <ion-item ng-click="vm.selectFriend(friend)" 
+                      ng-repeat="friend in vm.pendingFriends" 
+                      class="collection-item avatar">
+                <ion-option-button class="ion-minus-circled"
+                                   ng-click="vm.deleteChat(chat.id)">
+                </ion-option-button>
+                <img ng-src="{{ friend.avatar }}" alt="" class="circle avatar">
+                <span class="title">{{ friend.username }}</span>
+                <div ng-show="chat.last" class="extra">
+                    (en attente)
+                </div>
+                <img ng-click="vm.confirmFriend(friend)" class="action" src="main/assets/images/btn-option.png" alt="">
+            </ion-item>
+            <div class="item item-divider">
+                Ajouté
+            </div>
+            <ion-item ng-click="vm.selectFriend(friend)" ng-repeat="friend in vm.friends" class="collection-item avatar">
                 <img ng-src="{{ friend.avatar }}" alt="" class="circle">
                 <span class="title">{{ friend.username }}</span>
                 <a ui-sref="app.wish({wish: 'wish'})" class="secondary-content"><i class="mdi-action-grade"></i></a>
-            </li>
-        </ul>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

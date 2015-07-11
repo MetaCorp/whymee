@@ -125,7 +125,7 @@ angular.module('main')
 
     function showError(err) {
         console.log(err);// TODO Toast err
-                Materialize.toast(err, 4000);
+        Materialize.toast(err, 4000);
     }
 
 });
