@@ -18,6 +18,8 @@ angular.module('main')
         'top': '500px'
     };
 
+    vm.mapCtrl = null;
+
     vm.markers = [];
 
     vm.markerClicked = false;
@@ -48,6 +50,15 @@ angular.module('main')
 
     };
 
+    vm.centerMap = function() {
+        vm.map.center = {
+            latitude: vm.user.location.lat,
+            longitude: vm.user.location.long
+        };
+        
+        vm.map.zoom = 16;
+    };
+
     vm.unPendingWish = function(wish, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -61,19 +72,24 @@ angular.module('main')
         return Users.getInfos(userId);   
     };
 
-    vm.selectWish = function(wish) {// TODO hum
-        $timeout(function() {
-            $state.go('app.wish', { id: wish.id});
-        }, 0);
+    vm.selectWish = function(wish) {// TODO splash screen for performance?
+        $state.go('app.wish', { id: wish.id });
     };
 
-    vm.getWishState = function(wishId) {
-        if (wishStateDico[wishId] === undefined)
-            Users.getWishState(user.uid, wishId).then(function(data) {
-                wishStateDico[wishId] = data;
-            });
+    vm.getWishState = function(wish) {
+        if (wish === null) return 'none';
 
-        return wishStateDico[wishId];
+        if (wishStateDico[wish.id] === undefined) {
+
+            if (wish.owner === user.uid)
+                wishStateDico[wish.id] = 'owner';
+            else
+                Users.getWishState(user.uid, wish.id).then(function(data) {
+                    wishStateDico[wish.id] = data;
+                });
+        }
+
+        return wishStateDico[wish.id];
     };
 
     var markerClick = function(data) {

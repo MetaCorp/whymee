@@ -99,7 +99,6 @@ angular.module('main')
     }
 
     function ucfirst (str) {
-        // inspired by: http://kevin.vanzonneveld.net
         str += '';
         var f = str.charAt(0).toUpperCase();
         return f + str.substr(1);

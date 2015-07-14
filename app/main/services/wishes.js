@@ -52,7 +52,8 @@ angular.module('main')
     };
 
     var getContributorsInfos = function(wishId) {
-        return FbUtil.getItemsInfosFromIds(Ref.child('wish/' + wishId + '/contributors'), Ref.child('users'));
+        console.log('getContrib infos');
+        return FbUtil.getItemsInfosFromIds(Ref.child('wishes/' + wishId + '/contributors'), Ref.child('users'));
     };
 
     var addContributor = function(wish, userId) {

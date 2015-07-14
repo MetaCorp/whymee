@@ -4,6 +4,7 @@
         <div class="anim-circle"></div>
     </ion-content>
     <ion-content ng-if="vm.mapLoaded" scroll="false">
+        <img ng-click="vm.centerMap()" class="overlay-icn" src="main/assets/images/center-map.png" alt="">
         <div ng-show="vm.selectedWish" ng-style="vm.overlayY" class="wish-overlay">
             <ul class="z-depth-1 wish-coll">
                 <li ng-click="vm.selectWish(vm.selectedWish)">
@@ -24,16 +25,19 @@
                             <img src="main/assets/images/picto-participants-copie.png" alt="">
                             {{ ::vm.selectedWish.contributors }}
                         </div>
-                        <img ng-show="vm.getWishState(vm.selectedWish.id) === 'none'" 
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'none'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish.id) === 'pending'" 
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" 
                              ng-click="vm.unPendingWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish.id) === 'contributor'" 
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish.id) === 'loading'" 
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'loading'" 
+                             ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
+                             class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'owner'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
@@ -42,9 +46,9 @@
         </div>
         <div class="map-container">
             <ui-gmap-google-map ng-click="vm.mapClick($event)" options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events">
-<!--
-                <ui-gmap-marker ng-repeat="marker in vm.markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-                </ui-gmap-marker>
+                <!--
+<ui-gmap-marker ng-repeat="marker in vm.markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+</ui-gmap-marker>
 -->
                 <ui-gmap-markers models="vm.markers" coords="'coords'" options="'options'">
                 </ui-gmap-markers>
@@ -77,10 +81,11 @@
                             <img src="main/assets/images/picto-participants-copie.png" alt="">
                             {{ ::wish.contributors }}
                         </div>
-                        <img ng-show="vm.getWishState(wish.id) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish.id) === 'loading'" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'loading'" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'owner'" class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
                 </li>
             </ul>

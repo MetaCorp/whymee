@@ -86,7 +86,8 @@ angular.module('main')
         var arrayId = $firebaseArray(arrayIdRef);
 
         arrayId.$loaded(function() {
-            if(arrayId.$value === null || arrayId.length === 0) return [];
+            if(arrayId.$value === null || arrayId.length === 0) 
+                def.resolve([]);
 
             var array = [];
 

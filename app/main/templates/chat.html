@@ -1,11 +1,11 @@
-<ion-view view-title="Messages">
+<ion-view view-title="{{ vm.chat.title }}">
     <ion-content>
         <ul class="message-coll">
             <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
                 <img ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="48" height="48">
                 <div class="title">{{ message.text }}</div>
                 <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
-                <div class="time">{{ message.date | date: "hh'h'mm'm'" }}</div>
+                <div class="time">{{ message.date | date: "H'h'mm" }}</div>
             </li>
         </ul>
 

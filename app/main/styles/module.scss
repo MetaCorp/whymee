@@ -178,7 +178,7 @@ ul.collection {
 
 .new-message {
     position: absolute;
-    width: 100%
+    width: 100%;
 }
 
 .new-message a {
@@ -191,6 +191,13 @@ ul.collection {
     font-size: medium;   
 }
 
+.overlay-icn {
+    position: absolute;
+    left: 14px;
+    top: 31px;
+    z-index: 1;
+}
+
 #pending-list {
     position: relative;
     top: 0px;
@@ -198,6 +205,14 @@ ul.collection {
 
 ion-item.notif {
     font-size: small;
+    border-bottom: 1px solid #dcdcdc;
+}
+ion-item.notif .title {
+    position: absolute;
+    top: 24px;
+    left: 80px;
+    right: 5px;
+    white-space: normal;
 }
 
 ul.wish-coll {
@@ -363,16 +378,20 @@ ion-side-menu ion-item img {
     overflow: visible;
     background-color: white;
 }
+.wish-content .scroll {
+    position: relative;
+    top: -1px;
+}
 .wish-content .header {
     position: relative;
     color: white;
     padding: 20px 10px;
-    height: 121px;
+    height: 131px;
 }
 .wish-content .header .avatar {
     position: absolute;
     left: 20px;
-    top: 17px;
+    top: 18px;
     width: 69px;
     height: 69px;
 }
@@ -398,7 +417,7 @@ ion-side-menu ion-item img {
 .wish-content .header .dist {
     position: absolute;
     left: 30px;
-    top: 90px;
+    top: 95px;
     font-size: small;
 }
 .wish-content .header .contrib {
@@ -417,6 +436,8 @@ ion-side-menu ion-item img {
 }
 .wish-content .content .photo {
     text-align: center;
+    width: 33%;
+    display: inline-block;
 }
 .wish-content .content .title {
     width: 20%;
@@ -436,6 +457,10 @@ ion-side-menu ion-item img {
     text-align: center;
     height: 35px;
 }
+.wish-content .tabs2 .tab {
+    position: relative;
+    top: -1px;
+}
 .wish-content .tabs2 .tab.selected {
     background-color: gray;
 }
@@ -446,10 +471,17 @@ ion-side-menu ion-item img {
     font-size: medium;
 }
 .wish-content .tabs2.owner .tab {
-    color: white;
     padding: 8px 20px;
     display: inline-block;
     font-size: medium;
+}
+.wish-content .tabs2.owner .tab .title {
+    color: #515151;
+    font: 500 12px Roboto;
+}
+
+.wish-content .tabs2.owner .tab img {
+    margin-right: 2px;
 }
 
 .wish-overlay {
@@ -511,13 +543,21 @@ ion-side-menu ion-item img {
     top: 40px;
 }
 
+.clean-pos {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 ul.message-coll li {
     position: relative;
 }
 ul.message-coll img {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 7px;
+    left: 17px;
 }
 .message-coll .user {
     position: absolute;
@@ -541,6 +581,13 @@ ul.message-coll img {
     padding: 10px;
     margin: 0 20px 0 75px;
     border-radius: 5px;
+}
+ul.message-coll li.owner {
+    margin-top: 20px;
+}
+ul.message-coll li {
+    margin: 20px 0;
+    margin-top: 25px;
 }
 ul.message-coll li.owner .title {
     background-color: lightgray;
@@ -742,7 +789,7 @@ form.login {
     border-top: 1px solid lightgray;
 }
 .newwish-input .title {
-    width: 35%;
+    width: 40%;
     padding: 20px;
     padding-top: 25px;
     color: #3d3d3d;
@@ -845,6 +892,27 @@ ion-list.chat-coll ion-item .action {
     right: 20px;
     font: 300 11px / 36px Roboto;
 }
+ion-list.chat-coll ion-item .crop-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.crop-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    display: inline-block;
+}
+.crop-container.small {
+    width: 48px;
+    height: 48px;
+}
+.crop-container.small img {
+    width: 48px;
+}    
 
 .Profil .row2 {
     position: relative;

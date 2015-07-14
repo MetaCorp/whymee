@@ -1,4 +1,4 @@
-<ion-view view-title="{{ ::vm.wish.title }}">
+<ion-view view-title="{{ vm.wish.title }}">
     <ion-content scroll="false">
         <div class="map-container wish">
             <ui-gmap-google-map options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom'>
@@ -6,7 +6,7 @@
                 </ui-gmap-marker>
             </ui-gmap-google-map>
         </div>
-        <ion-content scroll="true" class="wish-content" style="top: {{ ::vm.screenHeight - 164 - 300 }}px">
+        <ion-content scroll="true" class="wish-content" style="top: {{ ::vm.screenHeight - 162 - 300 }}px">
             <div class="header blue">
                 <img ui-sref="app.profil({ id: vm.owner.id })" src="main/assets/images/photo.png" ng-src="{{ ::vm.owner.avatar }}" alt="" class="circle avatar">
                 <img ng-show="vm.state === 'none'"
@@ -32,47 +32,61 @@
                 </div>
                 <p></p>
             </div>
+            <!--            TABS -->
             <div ng-show="vm.state === 'owner'" class="tabs2 owner">
                 <span ng-click="vm.tabState = 'contributors'" 
-                      ng-class="{ selected: vm.tabState === 'contributors'}" class="tab">Participants</span>
+                      ng-class="{ selected: vm.tabState === 'contributors'}" class="tab">
+                    <img src="main/assets/images/picto-participants-copie.png" alt="">
+                    <span class="title">Participants</span>
+                </span>
                 <span ng-click="vm.tabState = 'messages'" 
-                      ng-class="{ selected: vm.tabState === 'messages'}" class="tab">Messages</span>
+                      ng-class="{ selected: vm.tabState === 'messages'}" class="tab">
+                    <img src="main/assets/images/picto-messages.png" alt="" style="
+    width: 17px;
+"><span class="title">Messages</span></span>
                 <span ng-click="vm.tabState = 'pendings'" 
-                      ng-class="{ selected: vm.tabState === 'pendings'}" class="tab">En attente</span>
+                      ng-class="{ selected: vm.tabState === 'pendings'}" class="tab"><img src="main/assets/images/picto-attente.png" alt=""><span class="title">En attente</span></span>
             </div>
             <div ng-show="vm.state === 'contributor'" class="tabs2 contributor">
                 <span ng-click="vm.tabState = 'contributors'" 
-                      ng-class="{ selected: vm.tabState = 'contributors'}" class="tab">Participants</span>
+                      ng-class="{ selected: vm.tabState === 'contributors'}" class="tab"><span class="title">Participants</span></span>
                 <span ng-click="vm.tabState = 'messages'" 
-                      ng-class="{ selected: vm.tabState = 'messages'}" class="tab">Messages</span>
+                      ng-class="{ selected: vm.tabState === 'messages'}" class="tab"><span class="title">Messages</span></span>
             </div>
-            <div ui-view></div>
-<!--
-            
+
             <div ng-show="vm.tabState === 'contributors'" class="content white">
-                contributors
-                <div class="photo" collection-repeat="user in vm.contributors"
+                <div class="photo" ng-repeat="user in vm.contributorsInfos"
                      item-height="140" item-width="100">
-                    <img width="80" src="main/assets/images/photo.png" ng-src="{{ ::user.avatar }}">
+
+                    <div class="crop-container circle">
+                        <img width="80" src="main/assets/images/photo.png" 
+                             ng-src="{{ ::user.avatar }}">
+                    </div>
                     <div>{{ ::user.first_name || user.username }}</div>
                 </div>
             </div>
-            <div ng-show="vm.tabState === 'messages'" class="content white">
-                messages
+            <div ng-show="vm.tabState === 'messages'" class="white">
+                <ul class="message-coll">
+                    <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
+                        <img ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="48" height="48">
+                        <div class="title">{{ message.text }}</div>
+                        <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
+                        <div class="time">{{ message.date | date: "hh'h'mm'm'" }}</div>
+                    </li>
+                </ul>
             </div>
-            <div ng-show="vm.tabState === 'pendings'" class="content white">
-                pendings
+            <div ng-show="vm.tabState === 'pendings'" class="white">
+                <!--               TODO: update view after action -->
+                <ion-list class="chat-coll">
+                    <ion-item ng-repeat="user in vm.pendingsInfos">
+                        <img ng-src="{{ ::user.avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <span class="title">{{ ::user.username }}</span>
+                        <a class="action" ng-click="vm.acceptPending(user)"><i class="mdi-action-done"></i></a>
+                    </ion-item>
+                </ion-list>
             </div>
 
-            <ul id="pending-list" ng-show="vm.isOwner" class="collection">
-                <h4>En attente</h4>
-                <li ng-repeat="user in vm.pendingsInfos" class="collection-item avatar">
-                    <img ng-src="{{ ::user.avatar }}" alt="" class="circle">
-                    <span class="title">{{ ::user.username }}</span>
-                    <a ng-click="vm.acceptPending(user)" class="secondary-content"><i class="mdi-action-done"></i></a>
-                </li>
-            </ul>
--->
+
         </ion-content>
     </ion-content>
 </ion-view>

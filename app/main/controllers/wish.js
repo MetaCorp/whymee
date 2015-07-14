@@ -1,16 +1,26 @@
 'use strict';
 angular.module('main')
-    .controller('WishCtrl', function($state, $stateParams, user, Users, Wishes, uiGmapGoogleMapApi, Device) {
+    .controller('WishCtrl', function($state, $stateParams, user, Users, Wishes, Chats, uiGmapGoogleMapApi, Device) {
 
     var vm = this;
 
     vm.tabState = 'contributors';
-    
+
     vm.user = Users.getInfos(user.uid);
     vm.pendings = Wishes.getPendings($stateParams.id);
     vm.contributors = Wishes.getContributors($stateParams.id);
+    vm.contributorsInfos = [];
+    
+    Wishes.getContributorsInfos($stateParams.id).then(function(data) {
+       vm.contributorsInfos = data;
+        console.log('data:', data);
+    });
 
     vm.wish = Wishes.getInfos($stateParams.id);
+
+    vm.wish.$loaded(function() {
+        vm.messages = Chats.getMessages(vm.wish.chat);
+    });
 
     vm.isPending = null;
     vm.isContributor = null;

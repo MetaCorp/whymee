@@ -7,20 +7,31 @@ angular.module('main')
     vm.user = Users.getInfos(user.uid);
     vm.profil = Users.getInfos($stateParams.id);
     vm.friends = [];
+    vm.pendings = [];
     vm.isFriend = false;
     vm.isPending = false;
 
     Users.getFriends(user.uid).then(function(data) {
         vm.friends = data;
+        console.log('vm.friends:', vm.friends);
         if (contains(vm.friends, $stateParams.id))
             vm.isFriend = true; 
+    });
+    
+    Users.getPendingFriends(user.uid).then(function(data) {
+        vm.pendings = data;
+        console.log('$stateParams.id:', user.uid);
+        console.log('vm.pendings:', vm.pendings);
+        if (contains(vm.pendings, user.uid))
+            vm.isPending = true;
     });
 
     vm.addFriend = function() {
         Users.addPendingFriend($stateParams.id, user.uid);
+        vm.isPending = true;
     };
 
-    // fix chat id1 !== id2
+    // FIXME chat id1 !== id2
     vm.chat = function() {
         Chats.getOrCreate(user.uid, $stateParams.id).then(function(chatId) {
             console.log('chatId:', chatId);

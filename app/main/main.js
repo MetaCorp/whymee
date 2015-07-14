@@ -3,7 +3,6 @@ angular.module('main', [
     'ionic',
     'ngCordova',
     'ui.router',
-    // TODO: load other modules selected during generation
     'firebase', 'firebase.auth', 'firebase.ref', 'uiGmapgoogle-maps', 'geolocation'
 ])
     .config(function($stateProvider, SECURED_ROUTES) {
@@ -75,8 +74,7 @@ angular.module('main', [
         url: '/chat',
         views: {
             'menuContent': {
-                templateUrl: 'main/templates/chat.html',
-                controller: 'ChatCtrl as vm'
+                templateUrl: 'main/templates/wish-chat.html'
             }
         }
     })

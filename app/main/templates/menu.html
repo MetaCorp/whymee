@@ -79,8 +79,10 @@
         <ion-content>
             <ion-list>
                 <ion-item ng-click="vm.goNotif(notif)" ng-class="{ notifnew: notif.new }" class="notif" ng-repeat="notif in vm.notifications" nav-clear menu-close>
-<!--                    <img ng-src="{{ vm.getUser(notif.user).avatar }}" alt="" class="cirle avatar">-->
-                    <span ng-show="notif.new">+ </span>{{ notif.title }}
+                    <div class="crop-container circle small">
+                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(notif.user).avatar }}" class="clean-pos">
+                    </div>
+                    <div class="title"><span ng-show="notif.new">+ </span>{{ notif.title }}</div>
                 </ion-item>
             </ion-list>
         </ion-content>

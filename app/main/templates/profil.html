@@ -2,14 +2,14 @@
     <ion-content scroll="false">
         <div class="header-pic">
             <img class="avatar" src="main/assets/images/photo.png" ng-src="{{ vm.profil.avatar }}" alt="">
-            <img ng-hide="vm.isPending" 
-                 ng-click="vm.addFriend()" 
+            <img ng-show="vm.isFriend" 
+                 ng-click="vm.chat()" 
                  src="main/assets/images/btn-amis-deja-message.png" 
                  alt="" class="profil-action">
-            <!--      TODO image amis           -->
-            <img ng-show="vm.isPending" 
+            <!--      TODO img add friend           -->
+            <img ng-hide="vm.isFriend || vm.isPending" 
                  ng-click="vm.addFriend()" 
-                 src="main/assets/images/btn-amis-deja-message.png" 
+                 src="main/assets/images/btn-ajouter-a-mes-amis.png" 
                  alt="" class="profil-action">
         </div>
         <div class="row2 header">
