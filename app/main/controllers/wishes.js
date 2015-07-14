@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('WishesCtrl', function($state, user, User, Users, Wishes) {
+    .controller('WishesCtrl', function($ionicPopup, $state, user, User, Users, Wishes) {
 
     var vm = this;
 
@@ -14,6 +14,8 @@ angular.module('main')
 
     var contribDico = {};
 
+    var confirmPopup = null;
+    
     Users.getWishes(user.uid).then(function(data) {
         vm.wishes = data;
         console.log('wishes:', data);
@@ -108,11 +110,40 @@ angular.module('main')
         vm.historic.splice(vm.historic.indexOf(wish), 1);
         Users.deleteWishFromHistoric(user.uid, wish.id);
     };
+    
+    vm.confirmDelete = function(wish) {
+        confirmPopup = $ionicPopup.confirm({
+            title: wish.title,
+            template: 'Voulez vous supprimer l\'envie?',
+            cancelText: 'Annuler',
+            okText: 'Supprimer'
+        });
+        
+        confirmPopup.then(function(res) {
+            if (res)
+                vm.deleteWishFromHistoric(wish);
+        });
+    };
 
     vm.cancelWish = function(wish) {
         vm.wishes.splice(vm.wishes.indexOf(wish), 1);
         Users.cancelWish(user.uid, wish);
     };
+    
+    vm.confirmCancel = function(wish) {
+        confirmPopup = $ionicPopup.confirm({
+            title: wish.title,
+            template: 'Voulez vous supprimer l\'envie?',
+            cancelText: 'Annuler',
+            okText: 'Supprimer'
+        });
+        
+        confirmPopup.then(function(res) {
+            if (res)
+                vm.cancelWish(wish);
+        });
+    };
+
 
     vm.getContributors = function(wishId) {
         return contribDico[wishId];  

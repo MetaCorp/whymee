@@ -6,7 +6,7 @@
         <ion-list can-swipe="true" class="wish-coll2">
             <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.wishes | orderBy: 'date_start': true" class="repeat-animation">
                 <ion-option-button class="ion-minus-circled"
-                                   ng-click="vm.cancelWish(wish)">
+                                   ng-click="vm.confirmCancel(wish)">
                 </ion-option-button>
                 <div class="container">
                     <div class="title">
@@ -28,7 +28,7 @@
             </ion-item>
             <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.historic | orderBy: 'date_start': true" class="repeat-animation">
                 <ion-option-button class="ion-minus-circled"
-                                   ng-click="vm.deleteWishFromHistoric(wish)">
+                                   ng-click="vm.confirmDelete(wish)">
                 </ion-option-button>
                 <div class="container">
                     <div class="title">

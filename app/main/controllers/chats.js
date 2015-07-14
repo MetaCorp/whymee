@@ -1,12 +1,28 @@
 'use strict';
 angular.module('main')
-    .controller('ChatsCtrl', function($state, user, Users, Chats) {
+    .controller('ChatsCtrl', function($ionicPopup, $state, user, Users, Chats) {
 
     var vm = this;
 
     vm.user = Users.getInfos(user.uid);
     vm.chatsId = Users.getChatsIds(user.uid);
     vm.chats = [];
+    
+    var confirmPopup = null;
+
+    vm.confirmDelete = function(chat) {
+        confirmPopup = $ionicPopup.confirm({
+            title: chat.title,
+            template: 'Voulez vous archiver le chat?',
+            cancelText: 'Annuler',
+            okText: 'Archiver'
+        });
+        
+        confirmPopup.then(function(res) {
+            if (res)
+                vm.deleteChat(chat.id);
+        });
+    };
 
     Users.getChats(user.uid).then(function(chats) {
         vm.chats = chats;

@@ -8,7 +8,7 @@ angular.module('main')
 
     vm.user = Users.getInfos(user.uid);
     vm.users = {};
-
+    
     var usersArray = [];
     Chats.getUsers($stateParams.chat).then(function(data) {
         usersArray = data;
@@ -27,7 +27,7 @@ angular.module('main')
     vm.profil = function() {
         //        $state.go('app.profil', { profil: $stateParams.chat });  
     };
-
+    
     vm.sendMessage = function(text) {
         var message = {
             text: text,

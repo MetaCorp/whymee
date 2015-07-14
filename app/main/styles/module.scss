@@ -215,6 +215,11 @@ ion-item.notif .title {
     white-space: normal;
 }
 
+.popup-container.popup-showing.active {
+    background-color: rgba(10, 10, 10, 0.5);
+    transition: 0.225s background-color ease-in-out;
+}
+
 ul.wish-coll {
     background-color: white;
 }
