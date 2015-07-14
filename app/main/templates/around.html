@@ -6,8 +6,8 @@
     <ion-content ng-if="vm.mapLoaded" scroll="false">
         <img ng-click="vm.centerMap()" class="overlay-icn" src="main/assets/images/center-map.png" alt="">
         <div ng-show="vm.selectedWish" ng-style="vm.overlayY" class="wish-overlay">
-            <ul class="z-depth-1 wish-coll">
-                <li ng-click="vm.selectWish(vm.selectedWish)">
+            <ion-list class="z-depth-1 wish-coll">
+                <ion-item class="rounded" ng-click="vm.selectWish(vm.selectedWish)">
                     <div class="container">
                         <img src="main/assets/images/photo.png" 
                              ng-src="{{ ::vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
@@ -29,7 +29,7 @@
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-participer-copie.png" alt="">
                         <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" 
-                             ng-click="vm.unPendingWish(vm.selectedWish, $event)" 
+                             ng-click="vm.confirmDelete(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
                         <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" 
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
@@ -41,8 +41,8 @@
                              ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
                              class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
-                </li>
-            </ul>
+                </ion-item>
+            </ion-list>
         </div>
         <div class="map-container">
             <ui-gmap-google-map ng-click="vm.mapClick($event)" options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom' events="vm.map.events">
@@ -60,8 +60,8 @@
                     <img src="main/assets/images/Rectangle-1.png" alt="">
                 </div>
             </div>
-            <ul class="wish-coll">
-                <li ng-repeat="wish in vm.wishes | orderBy: 'date_start' : true"
+            <ion-list class="wish-coll">
+                <ion-item ng-repeat="wish in vm.wishes | orderBy: 'date_start' : true"
                     ng-click="vm.selectWish(wish)" 
                     ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish)">
                     <div class="container">
@@ -82,13 +82,13 @@
                             {{ ::wish.contributors }}
                         </div>
                         <img ng-show="vm.getWishState(wish) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.confirmDelete(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
                         <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
                         <img ng-show="vm.getWishState(wish) === 'loading'" class="action" src="main/assets/images/btn-annuler.png" alt="">
                         <img ng-show="vm.getWishState(wish) === 'owner'" class="action" src="main/assets/images/btn-annuler.png" alt="">
                     </div>
-                </li>
-            </ul>
+                </ion-item>
+            </ion-list>
         </ion-content>
     </ion-content>
 </ion-view>

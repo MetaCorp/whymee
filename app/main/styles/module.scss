@@ -220,63 +220,74 @@ ion-item.notif .title {
     transition: 0.225s background-color ease-in-out;
 }
 
-ul.wish-coll {
+ion-item {
+    transition: 0.225s background-color ease-in-out;
+}
+ion-item .item-content {
+    transition: 0.225s background-color ease-in-out;
+}
+ion-item.rounded {
+    border-radius: 7px;
+}
+
+ion-list.wish-coll {
     background-color: white;
 }
-ul.wish-coll li {
+ion-list.wish-coll ion-item {
     position: relative;
     height: 120px;
     border-bottom: 1px solid #dcdcdc;
+    border-top: none;
 }
-ul.wish-coll li img {
+ion-list.wish-coll ion-item img {
     margin-right: 3px;
 }
-ul.wish-coll li img.avatar {
+ion-list.wish-coll ion-item img.avatar {
     position: absolute;
     left: 20px;
     top: 14px;
     width: 69px;
     height: 69px;
 }
-ul.wish-coll li .title {
+ion-list.wish-coll ion-item .title {
     position: absolute;
     left: 105px;
     top: 34px;
     right: 60px;
     font: 400 16px Roboto;
 }
-ul.wish-coll li .dist {
+ion-list.wish-coll ion-item .dist {
     position: absolute;
     left: 32px;
     top: 80px;
     color: #a5a5a5;
     font: 400 11px / 36px Roboto;
 }
-ul.wish-coll li .dist.deco {
+ion-list.wish-coll ion-item .dist.deco {
     padding-left: 8px;
 }
-ul.wish-coll li .date {
+ion-list.wish-coll ion-item .date {
     position: absolute;
     left: 105px;
     top: 66px;
     color: #a5a5a5;
     font: 400 11px / 36px Roboto;
 }
-ul.wish-coll li .contrib {
+ion-list.wish-coll ion-item .contrib {
     position: absolute;
     right: 82px;
     top: 66px;
     color: #a5a5a5;
     font: 700 11px / 36px Roboto;
 }
-ul.wish-coll li .action {
+ion-list.wish-coll ion-item .action {
     position: absolute;
     right: 14px;
     top: 36px;
     color: #a5a5a5;
     font: 700 11px / 36px Roboto;
 }
-ul.wish-coll li .container {
+ion-list.wish-coll ion-item .container {
     padding: 0;
 }
 

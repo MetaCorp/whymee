@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('AroundCtrl', function($timeout, $state, user, Users, Wishes, uiGmapGoogleMapApi, geolocation, Geocode, Device) {
+    .controller('AroundCtrl', function($ionicPopup, $timeout, $state, user, Users, Wishes, uiGmapGoogleMapApi, geolocation, Geocode, Device) {
 
     var vm = this;
 
@@ -30,6 +30,24 @@ angular.module('main')
 
     var wishStateDico = {};
 
+    var confirmPopup = null;
+
+    vm.confirmDelete = function(wish, event) {
+        event.stopPropagation();
+        event.preventDefault();
+        confirmPopup = $ionicPopup.confirm({
+            title: wish.title,
+            template: 'Voulez vous quitter l\'envie?',
+            cancelText: 'Annuler',
+            okText: 'Quitter'
+        });
+        
+        confirmPopup.then(function(res) {
+            if (res)
+                vm.unPendingWish(wish);
+        });
+    };
+    
     vm.subscribeWish = function(wish, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -59,9 +77,7 @@ angular.module('main')
         vm.map.zoom = 16;
     };
 
-    vm.unPendingWish = function(wish, event) {
-        event.stopPropagation();
-        event.preventDefault();
+    vm.unPendingWish = function(wish) {
         wishStateDico[wish.id] = 'loading';
         Wishes.removePending(wish.id, user.uid).then(function() {
             wishStateDico[wish.id] = 'none';
