@@ -10,9 +10,9 @@ angular.module('main')
     vm.pendings = Wishes.getPendings($stateParams.id);
     vm.contributors = Wishes.getContributors($stateParams.id);
     vm.contributorsInfos = [];
-    
+
     Wishes.getContributorsInfos($stateParams.id).then(function(data) {
-       vm.contributorsInfos = data;
+        vm.contributorsInfos = data;
         console.log('data:', data);
     });
 
@@ -32,6 +32,10 @@ angular.module('main')
     vm.owner = null;
 
     vm.state = 'none';
+
+    vm.getUser = function(userId) {
+        return Users.getInfos(userId);
+    };
 
     vm.user.$loaded(function() {
         vm.wish.$loaded(function() {
@@ -63,7 +67,7 @@ angular.module('main')
                     },
                     id: 0,
                     options: {
-                        icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
+                        icon: 'main/assets/images/picto-geolocalisation-autres.png'
                     }
                 };
 

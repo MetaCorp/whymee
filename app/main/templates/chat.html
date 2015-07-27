@@ -2,10 +2,12 @@
     <ion-content>
         <ul class="message-coll">
             <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
-                <img ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="48" height="48">
+                <img class="avatar" ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="44" height="44">
                 <div class="title">{{ message.text }}</div>
                 <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
-                <div class="time">{{ message.date | date: "H'h'mm" }}</div>
+                <div ng-hide="message.owner === vm.user.id" class="time">{{ message.date | date: "H'h'mm" }}</div>
+                <img ng-hide="message.owner === vm.user.id" class="bulle-bleu" src="main/assets/images/bulle-bleu.png" alt="">
+                <img ng-show="message.owner === vm.user.id" class="bulle-grise" src="main/assets/images/bulle-grise.png" alt="">
             </li>
         </ul>
 

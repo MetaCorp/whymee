@@ -4,7 +4,7 @@
         <div class="anim-circle"></div>
     </ion-content>
     <ion-content ng-if="vm.mapLoaded" scroll="false">
-        <img ng-click="vm.centerMap()" class="overlay-icn" src="main/assets/images/center-map.png" alt="">
+        <img ng-click="vm.centerMap()" class="overlay-icn" src="main/assets/images/picto-centrer-carte.png" alt="">
         <div ng-show="vm.selectedWish" ng-style="vm.overlayY" class="wish-overlay">
             <ion-list class="z-depth-1 wish-coll">
                 <ion-item class="rounded" ng-click="vm.selectWish(vm.selectedWish)">
@@ -22,26 +22,17 @@
                             {{ vm.selectedWish.date_start | cdate }}
                         </div>
                         <div class="contrib">
-                            <img src="main/assets/images/picto-participants-copie.png" alt="">
+                            <img src="main/assets/images/picto-participants.png" alt="">
                             {{ ::vm.selectedWish.contributors }}
                         </div>
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'none'" 
-                             ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" 
-                             ng-click="vm.confirmDelete(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" 
-                             ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'loading'" 
-                             ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'owner'" 
-                             ng-click="vm.subscribeWish(vm.selectedWish, $event)" 
-                             class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'none'" ng-click="vm.subscribeWish(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-participer.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" ng-click="vm.confirmDelete(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" ng-click="vm.subscribeWish(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
+                        <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(vm.selectedWish) === 'loading'" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(vm.selectedWish) === 'owner'" class="action" src="main/assets/images/btn-valide.png" alt="">
                     </div>
                 </ion-item>
+                <img ng-style="vm.overlayX" class="arrow-bulle" src="main/assets/images/bulle.png" alt="">
             </ion-list>
         </div>
         <div class="map-container">
@@ -57,8 +48,9 @@
         <ion-content class="wish-list" scroll="true" style="top: {{ ::vm.screenHeight - 30 - 30 }}px">
             <div class="header">
                 <div class="arrow">
-                    <img src="main/assets/images/Rectangle-1.png" alt="">
+                    <img src="main/assets/images/triangle.png" alt="">
                 </div>
+                <div ui-sref="app.newwish" class="gray newwish">Poster une envie</div>
             </div>
             <ion-list class="wish-coll">
                 <ion-item ng-repeat="wish in vm.wishes | orderBy: 'date_start' : true"
@@ -78,14 +70,14 @@
                             {{ ::wish.date_start | cdate }}
                         </div>
                         <div class="contrib">
-                            <img src="main/assets/images/picto-participants-copie.png" alt="">
+                            <img src="main/assets/images/picto-participants.png" alt="">
                             {{ ::wish.contributors }}
                         </div>
-                        <img ng-show="vm.getWishState(wish) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer-copie.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.confirmDelete(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'loading'" class="action" src="main/assets/images/btn-annuler.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'owner'" class="action" src="main/assets/images/btn-annuler.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.confirmDelete(wish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
+                        <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(wish) === 'loading'" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(wish) === 'owner'" class="action" src="main/assets/images/btn-valide.png" alt="">
                     </div>
                 </ion-item>
             </ion-list>

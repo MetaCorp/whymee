@@ -15,14 +15,14 @@ angular.module('main')
     var contribDico = {};
 
     var confirmPopup = null;
-    
+
     Users.getWishes(user.uid).then(function(data) {
         vm.wishes = data;
         console.log('wishes:', data);
 
-        function ret(data) {
-            console.log('data:', data);
-            contribDico[vm.wishes[i].id] = data;            
+        function ret() {
+            //                    console.log('data:', data);
+            //                    contribDico[vm.wishes[i].id] = data;            
         }
 
         for(var i = 0; i < vm.wishes.length; i++) {
@@ -58,10 +58,10 @@ angular.module('main')
         vm.historic = data;
         console.log('historic:', data);
 
-        function ret(data) {
-            console.log('data:', data);
-            contribDico[vm.historic[i].id] = data;            
-        }
+                function ret() {
+//                    console.log('data:', data);
+//                    contribDico[vm.historic[i].id] = data;            
+                }
 
 
         for(var i = 0; i < vm.historic.length; i++) {
@@ -110,7 +110,7 @@ angular.module('main')
         vm.historic.splice(vm.historic.indexOf(wish), 1);
         Users.deleteWishFromHistoric(user.uid, wish.id);
     };
-    
+
     vm.confirmDelete = function(wish) {
         confirmPopup = $ionicPopup.confirm({
             title: wish.title,
@@ -118,7 +118,7 @@ angular.module('main')
             cancelText: 'Annuler',
             okText: 'Supprimer'
         });
-        
+
         confirmPopup.then(function(res) {
             if (res)
                 vm.deleteWishFromHistoric(wish);
@@ -129,7 +129,7 @@ angular.module('main')
         vm.wishes.splice(vm.wishes.indexOf(wish), 1);
         Users.cancelWish(user.uid, wish);
     };
-    
+
     vm.confirmCancel = function(wish) {
         confirmPopup = $ionicPopup.confirm({
             title: wish.title,
@@ -137,7 +137,7 @@ angular.module('main')
             cancelText: 'Annuler',
             okText: 'Supprimer'
         });
-        
+
         confirmPopup.then(function(res) {
             if (res)
                 vm.cancelWish(wish);
@@ -146,6 +146,12 @@ angular.module('main')
 
 
     vm.getContributors = function(wishId) {
+        if (contribDico[wishId] === undefined) {
+            Wishes.getContributorsInfos(wishId).then(function(data) {
+                contribDico[wishId] = data;
+            });
+        }
+
         return contribDico[wishId];  
     };
 

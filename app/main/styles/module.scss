@@ -26,6 +26,9 @@ body {
     font-family: Roboto;
 }
 
+ion-side-menu.left {
+
+}
 ion-side-menu.left ion-header-bar {
     height: 150px!important;   
 }
@@ -237,7 +240,7 @@ ion-list.wish-coll ion-item {
     position: relative;
     height: 120px;
     border-bottom: 1px solid #dcdcdc;
-    border-top: none;
+    border-top: 1px solid #dcdcdc;
 }
 ion-list.wish-coll ion-item img {
     margin-right: 3px;
@@ -255,6 +258,7 @@ ion-list.wish-coll ion-item .title {
     top: 34px;
     right: 60px;
     font: 400 16px Roboto;
+    white-space: normal;
 }
 ion-list.wish-coll ion-item .dist {
     position: absolute;
@@ -272,6 +276,10 @@ ion-list.wish-coll ion-item .date {
     top: 66px;
     color: #a5a5a5;
     font: 400 11px / 36px Roboto;
+}
+ion-list.wish-coll ion-item .contrib img {
+    top: 2px;
+    position: relative;
 }
 ion-list.wish-coll ion-item .contrib {
     position: absolute;
@@ -332,16 +340,25 @@ ion-list.wish-coll2 ion-item .avatar-list {
     top: 73px;
 }
 ion-list.wish-coll2 ion-item .avatar-list img {
-    width: 44px;
-    height: 44px;
+    //    width: 44px;
+    //    height: 44px;
 }
 
 .wish-list .header {
     background-color: white;
-    height: 20px;
+    height: 63px;
     text-align: center;
 }
-
+.wish-list .header .newwish {
+    position: relative;
+    top: -46px;
+    margin: auto;
+    height: 30px;
+    padding-top: 6px;
+    color: white;
+    background-color: lightgray;
+    width: 80%;
+}
 .wish-list .header .arrow {
     position: relative;
     top: -25px;
@@ -387,6 +404,7 @@ ion-side-menu ion-item img {
 .title-image {
     position: relative;
     top: 6px;
+    width: 110px;
 }
 
 .wish-content {
@@ -477,8 +495,8 @@ ion-side-menu ion-item img {
     position: relative;
     top: -1px;
 }
-.wish-content .tabs2 .tab.selected {
-    background-color: gray;
+.wish-content .tabs2 .tab.selected .title {
+    color: dodgerblue;
 }
 .wish-content .tabs2.contributor .tab {
     color: white;
@@ -487,11 +505,11 @@ ion-side-menu ion-item img {
     font-size: medium;
 }
 .wish-content .tabs2.owner .tab {
-    padding: 8px 20px;
+    padding: 8px 16px;
     display: inline-block;
     font-size: medium;
 }
-.wish-content .tabs2.owner .tab .title {
+.wish-content .tabs2 .tab .title {
     color: #515151;
     font: 500 12px Roboto;
 }
@@ -511,6 +529,11 @@ ion-side-menu ion-item img {
 
 .wish-overlay ul {
     border-radius: 10px;  
+}
+.wish-overlay ion-list .arrow-bulle {
+    position: absolute;
+    bottom: -18px;
+    z-index: 2;
 }
 
 .wish-overlay.ng-hide {
@@ -569,44 +592,43 @@ ion-side-menu ion-item img {
 
 ul.message-coll li {
     position: relative;
-}
-ul.message-coll img {
-    position: absolute;
-    top: 7px;
-    left: 17px;
-}
-.message-coll .user {
-    position: absolute;
-    top: 7px;
-    left: 80px;
-    color: gray;
-}
-.message-coll .time {
-    float: right;
-    position: relative;
-    right: 25px;
-    top: 10px;
-    font-size: small;
-    color: gray;
-}
-.message-coll .title {
-    position: relative;
-    top: 30px;
-    white-space: pre;
+    margin: 28px 30px 20px 70px;
     background-color: lightblue;
-    padding: 10px;
-    margin: 0 20px 0 75px;
     border-radius: 5px;
+    padding: 8px 12px;
 }
 ul.message-coll li.owner {
+    background-color: lightgray;
     margin-top: 20px;
 }
-ul.message-coll li {
-    margin: 20px 0;
-    margin-top: 25px;
+ul.message-coll img.bulle-bleu {
+    position: absolute;
+    top: 11px;
+    left: -6px;
 }
-ul.message-coll li.owner .title {
-    background-color: lightgray;
+ul.message-coll img.bulle-grise {
+    position: absolute;
+    top: 11px;
+    right: -6px;
+}
+ul.message-coll img.avatar {
+    position: absolute;
+    left: -55px;
+    top: -18px;
+}
+ul.message-coll .user {
+    position: absolute;
+    left: 2px;
+    top: -19px;
+    font-size: x-small;
+    color: lightblue;
+}
+ul.message-coll .time {
+    position: absolute;
+    font-size: x-small;
+    color: gray;
+    left: -47px;
+    bottom: -9px;
 }
 
 .repeat-animation.ng-enter-stagger {
@@ -699,7 +721,7 @@ form.login {
 }
 
 .login-content {
-    background: url(../assets/images/login-bg.png);
+    background: url(../assets/images/fond.png);
 }
 
 .login-input {
@@ -923,11 +945,12 @@ ion-list.chat-coll ion-item .crop-container {
     display: inline-block;
 }
 .crop-container.small {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+    padding-right: 5px;
 }
 .crop-container.small img {
-    width: 48px;
+    width: 44px;
 }    
 
 .Profil .row2 {
@@ -984,7 +1007,7 @@ ion-list.chat-coll ion-item .crop-container {
 }
 
 .splash-screen {
-    background: url(../assets/images/login-bg.png);
+    background: url(../assets/images/fond.png);
     position: absolute;
     top: 0;
     text-align: center;
@@ -1045,6 +1068,8 @@ input {
     bottom: 14px;
     right: 14px;
 }
+
+
 
 /*======= Map Styling - CARE ============*/
 .gmnoprint a, .gmnoprint span {

@@ -16,13 +16,17 @@
                         {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
                     </div>
                     <div class="contrib">
-                        <img src="main/assets/images/picto-participants-copie.png" alt="">
+                        <img src="main/assets/images/picto-participants.png" alt="">
                         {{ wish.contributors }}
                     </div>
                     <div class="avatar-list">
-                        <img ng-click="vm.goProfil(wish.owner, $event)" src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}" alt="" class="circle">
-                        <img ng-repeat="user in vm.getContributors(wish.id)"
-                            src="main/assets/images/photo.png" ng-src="{{ user.avatar }}" alt="" class="circle">
+                        <div ng-click="vm.goProfil(wish.owner, $event)" class="crop-container small circle">
+                            <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}">
+                        </div>
+                        <div ng-repeat="user in vm.getContributors(wish.id)"
+                             class="crop-container circle small">
+                            <img src="main/assets/images/photo.png" ng-src="{{ user.avatar }}">
+                        </div>
                     </div>
                 </div>
             </ion-item>
@@ -38,7 +42,7 @@
                         {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
                     </div>
                     <div class="contrib">
-                        <img src="main/assets/images/picto-participants-copie.png" alt="">
+                        <img src="main/assets/images/picto-participants.png" alt="">
                         {{ wish.contributors }}
                     </div>
                     <div class="avatar-list">

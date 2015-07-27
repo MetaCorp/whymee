@@ -17,6 +17,9 @@ angular.module('main')
     vm.overlayY = {
         'top': '500px'
     };
+    vm.overlayY = {
+        'left': '200px'
+    };
 
     vm.mapCtrl = null;
 
@@ -32,6 +35,11 @@ angular.module('main')
 
     var confirmPopup = null;
 
+    vm.preventProp = function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+    };
+
     vm.confirmDelete = function(wish, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -41,13 +49,13 @@ angular.module('main')
             cancelText: 'Annuler',
             okText: 'Quitter'
         });
-        
+
         confirmPopup.then(function(res) {
             if (res)
                 vm.unPendingWish(wish);
         });
     };
-    
+
     vm.subscribeWish = function(wish, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -73,7 +81,7 @@ angular.module('main')
             latitude: vm.user.location.lat,
             longitude: vm.user.location.long
         };
-        
+
         vm.map.zoom = 16;
     };
 
@@ -93,7 +101,7 @@ angular.module('main')
     };
 
     vm.getWishState = function(wish) {
-        if (wish === null) return 'none';
+        if (wish === undefined || wish === null) return 'none';
 
         if (wishStateDico[wish.id] === undefined) {
 
@@ -136,14 +144,18 @@ angular.module('main')
             console.log('markerClicked');
             console.log('event:', event);
             // Todo arrow popup
-            // var x = event.x || event.pageX;
             var y = event.y || event.pageY;
+            var x = event.x || event.pageX;
+
+            vm.overlayX = {
+                'left': (x - 31) + 'px'
+            };
 
             var top = y - 180;
 
             if (top > 0)
                 vm.overlayY = {
-                    'top': (y - 180) + 'px'
+                    'top': (y - 200) + 'px'
                 };
             else
                 vm.overlayY = {
