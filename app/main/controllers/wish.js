@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('WishCtrl', function($state, $stateParams, user, Users, Wishes, Chats, uiGmapGoogleMapApi, Device) {
+    .controller('WishCtrl', function($state, $stateParams, $ionicHistory, $ionicPopup, user, Users, Wishes, Chats, uiGmapGoogleMapApi, Device) {
 
     var vm = this;
 
@@ -33,12 +33,71 @@ angular.module('main')
 
     vm.state = 'none';
 
+    var confirmPopup = null;
+
+    /* TODO update real time pending */
+    vm.pendings.$watch(function(event) {
+        switch(event.event) {
+            case 'child_added':
+                //                Wishes.getIdFromPendings(user.uid, event.key).$loaded(function(data) {
+                //                    console.log('child added:', data);
+                //                    if (data.$value !== null) {
+                //                        Users.getInfos(data.$value).$loaded(function(data) {
+                //                            vm.pendings.push(data); 
+                //                        });
+                //                    }
+                //                });
+                break;
+            case 'child_removed':
+                //                console.log('event:(remove)', event);
+                //                Wishes.getIdFromPendings(user.uid, event.key).$loaded(function(data) {
+                //                    var index = vm.pendings.indexOf(data);
+                //                    vm.chats.splice(index, 1);
+                //                });
+                break;
+        }
+    });
+
     vm.getUser = function(userId) {
         return Users.getInfos(userId);
     };
 
+    var usersArray = [];
+
+    vm.sendMessage = function(text) {
+        var message = {
+            text: text,
+            owner: user.uid,
+            date: Date.now()
+        };
+
+        Chats.send(vm.wish.chat, message);
+
+        for (var i = 0; i < usersArray.length; i++) {
+            if (usersArray[i].id !== user.uid) {
+                Users.sendNotif(usersArray[i].id, { // add chat title
+                    title: 'Nouveau Message de ' + vm.user.username + ' sur .',
+                    user: user.uid,
+                    type: 'chat',
+                    id: vm.wish.chat,
+                    new: true
+                });
+            }
+        }
+        vm.messageTxt = '';
+    };
+
     vm.user.$loaded(function() {
         vm.wish.$loaded(function() {
+            Chats.getUsers(vm.wish.chat).then(function(data) {
+                usersArray = data;
+                var i;
+                for(i = 0; i < data.length; i++) {
+                    vm.users[data[i].id] = data[i];
+                }
+                console.log('vm.users:', vm.users);
+            });
+
             if (vm.wish.owner === user.uid)
                 vm.state = 'owner';
             else
@@ -105,6 +164,24 @@ angular.module('main')
         vm.state = 'loading';
         Wishes.removePending($stateParams.id, user.uid).then(function() {
             vm.state = 'none';
+        });
+    };
+
+    vm.unSubscribeWish = function() {
+        confirmPopup = $ionicPopup.confirm({
+            title: vm.wish.title,
+            template: 'Êtes vous sûr de vouloir quitter cette envie?',
+            cancelText: 'Annuler',
+            okText: 'Quitter'
+        });
+
+        confirmPopup.then(function(res) {
+            if (res) {// TODO : remove contributor
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
+                $state.go('app.around');
+            }
         });
     };
 

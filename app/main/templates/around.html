@@ -18,16 +18,15 @@
                             <img ng-show="true" src="main/assets/images/en-ligne.png" alt="">
                             {{ ::vm.selectedWish.user_range }}150m
                         </div>
-                        <div class="date">
-                            {{ vm.selectedWish.date_start | cdate }}
+                        <div class="date" ng-bind-html="vm.selectedWish.date_start | cdate">
                         </div>
                         <div class="contrib">
                             <img src="main/assets/images/picto-participants.png" alt="">
                             {{ ::vm.selectedWish.contributors }}
                         </div>
                         <img ng-show="vm.getWishState(vm.selectedWish) === 'none'" ng-click="vm.subscribeWish(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-participer.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" ng-click="vm.confirmDelete(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
-                        <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" ng-click="vm.subscribeWish(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'pending'" ng-click="vm.unPendingWish(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-show="vm.getWishState(vm.selectedWish) === 'contributor'" ng-click="vm.confirmDelete(vm.selectedWish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
                         <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(vm.selectedWish) === 'loading'" class="action" src="main/assets/images/btn-attente.png" alt="">
                         <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(vm.selectedWish) === 'owner'" class="action" src="main/assets/images/btn-valide.png" alt="">
                     </div>
@@ -66,16 +65,16 @@
                                  src="main/assets/images/en-ligne.png" alt="">
                             {{ wish.user_range }}150m
                         </div>
-                        <div class="date">
-                            {{ ::wish.date_start | cdate }}
+                        <div class="date" ng-bind-html="wish.date_start | cdate">
+                           
                         </div>
                         <div class="contrib">
                             <img src="main/assets/images/picto-participants.png" alt="">
                             {{ ::wish.contributors }}
                         </div>
                         <img ng-show="vm.getWishState(wish) === 'none'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-participer.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.confirmDelete(wish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
-                        <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.subscribeWish(wish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'pending'" ng-click="vm.unPendingWish(wish, $event)" class="action" src="main/assets/images/btn-attente.png" alt="">
+                        <img ng-show="vm.getWishState(wish) === 'contributor'" ng-click="vm.confirmDelete(wish, $event)" class="action" src="main/assets/images/btn-valide.png" alt="">
                         <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(wish) === 'loading'" class="action" src="main/assets/images/btn-attente.png" alt="">
                         <img ng-click="vm.preventProp($event)" ng-show="vm.getWishState(wish) === 'owner'" class="action" src="main/assets/images/btn-valide.png" alt="">
                     </div>

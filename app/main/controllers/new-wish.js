@@ -1,6 +1,6 @@
 'use strict';
 angular.module('main')
-    .controller('NewWishCtrl', function($state, $ionicHistory, user, Users, Wishes, Geocode, Chats, geolocation, uiGmapGoogleMapApi) {
+    .controller('NewWishCtrl', function($state, $ionicHistory, user, Users, Wishes, Geocode, Chats, geolocation, uiGmapGoogleMapApi, Device) {
 
     var vm = this;
     //    $('#age-minmax').ionRangeSlider({
@@ -34,6 +34,8 @@ angular.module('main')
     vm.mapOpen = false;
 
     vm.wishDate = new Date();
+    
+    vm.screenHeight = Device.getHeight();
 
     vm.wish = {
         title: '',
@@ -61,6 +63,11 @@ angular.module('main')
 
     vm.male = true;
     vm.female = true;
+    
+    vm.mapTop = {
+        'top': vm.screenHeight + 'px',
+        'height': vm.screenHeight + 'px'
+    };
 
     vm.user.$loaded(function() {
         uiGmapGoogleMapApi.then(function() {
@@ -84,7 +91,7 @@ angular.module('main')
                 },
                 id: 0,
                 options: {
-                    icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
+                    icon: 'main/assets/images/picto-geolocalisation-perso.png'
                 }
             };
 

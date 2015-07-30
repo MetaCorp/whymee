@@ -16,11 +16,12 @@
                      ng-click="vm.unPendingWish()" 
                      class="btn-go" src="main/assets/images/btn-attente2.png" alt="">
                 <img ng-show="vm.state === 'contributor'"
+                     ng-click="vm.unSubscribeWish()"
                      class="btn-go" src="main/assets/images/btn-supprimer-participation.png" alt="">
                 <img ng-show="vm.state === 'loading'"
                      class="btn-go" src="main/assets/images/btn-participer2.png" alt="">
                 <div class="title">{{ ::vm.wish.title }}</div>
-                <div class="date">{{ vm.wish.date_start | cdate }}</div>
+                <div class="date" ng-bind-html="vm.wish.date_start | cdate"></div>
                 <div class="user">Postée par <strong>{{ ::vm.owner.username }}</strong></div>
                 <div class="contrib">
                     <img class="icn" src="main/assets/images/picto-participants-blanc.png" alt="">
@@ -82,9 +83,12 @@
             <div ng-show="vm.tabState === 'messages'" class="white">
                 <ul class="message-coll">
                     <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
-                        <img class="avatar" ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="44" height="44">
+                        <div ng-hide="message.owner === vm.user.id" class="crop-container circle avatar">
+                            <img src="main/assets/images/photo.png" 
+                                 ng-src="{{ ::vm.getUser(message.owner).avatar }}">
+                        </div>
                         <div class="title">{{ message.text }}</div>
-                        <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
+                        <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).first_name }}</div>
                         <div ng-hide="message.owner === vm.user.id" class="time">{{ message.date | date: "H'h'mm" }}</div>
                         <img ng-hide="message.owner === vm.user.id" class="bulle-bleu" src="main/assets/images/bulle-bleu.png" alt="">
                         <img ng-show="message.owner === vm.user.id" class="bulle-grise" src="main/assets/images/bulle-grise.png" alt="">
@@ -96,7 +100,7 @@
                 <ion-list class="chat-coll">
                     <ion-item ng-repeat="user in vm.pendingsInfos">
                         <img src="main/assets/images/photo.png" ng-src="{{ ::user.avatar }}" alt="" class="circle avatar" width="64" height="64">
-                        <span class="title">{{ ::user.username }}</span>
+                        <span class="title">{{ ::user.first_name }}</span>
                         <a class="action" ng-click="vm.acceptPending(user)"><i class="mdi-action-done"></i></a>
                     </ion-item>
                 </ion-list>
@@ -104,5 +108,10 @@
 
 
         </ion-content>
+
+        <div class="new-message" ng-show="vm.tabState === 'messages'">
+            <input placeholder="Entrez un message ici" ng-model="vm.messageTxt" id="message" type="text">
+            <img ng-click="vm.sendMessage(vm.messageTxt)" class="action-message" src="main/assets/images/btn-option.png" alt="">
+        </div>
     </ion-content>
 </ion-view>

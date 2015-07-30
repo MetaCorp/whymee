@@ -130,6 +130,22 @@ ion-side-menu ion-header-bar .content {
     bottom: 20px;
 }
 
+.map-content.newwish {// FIX problem map render
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 700px;
+    width: 400px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    transition: 0.4s top ease-in-out;
+}
+
+.map-content.newwish.open {
+    top: 0!important;
+}
+
 .map-container.wish .angular-google-map-container {
     position: absolute;
     top: 0;
@@ -149,6 +165,7 @@ ion-side-menu ion-header-bar .content {
 .wish-list {
     position: absolute;
     overflow: visible;
+    z-index: 10;
 }
 
 label.new-wish-title {
@@ -178,16 +195,23 @@ ul.collection {
     /*    overflow-y: scroll;*/
 }
 
-
 .new-message {
     position: absolute;
     width: 100%;
+    border-top: 1px solid lightgray;
+    padding: 3px 20px;
+    bottom: 0;
+    height: 46px;
+    background-color: white;
 }
-
-.new-message a {
+.new-message img.action-message {
+    float: right;
     position: relative;
-    top: -60px;
-    left: 280px;
+    top: -40px;
+    right: 0px;
+}
+.new-message input {
+    width: 93%;
 }
 
 .toast {
@@ -198,7 +222,7 @@ ul.collection {
     position: absolute;
     left: 14px;
     top: 31px;
-    z-index: 1;
+    z-index: 7;
 }
 
 #pending-list {
@@ -433,6 +457,7 @@ ion-side-menu ion-item img {
     position: absolute;
     left: 110px;
     top: 30px;
+    right: 20px;
     color: white;
     font-size: large;
 }
@@ -487,7 +512,7 @@ ion-side-menu ion-item img {
 }
 .wish-content .tabs2 {
     position: relative;
-    background-color: lightgray;
+    background-color: #eeeeee;
     text-align: center;
     height: 35px;
 }
@@ -496,7 +521,7 @@ ion-side-menu ion-item img {
     top: -1px;
 }
 .wish-content .tabs2 .tab.selected .title {
-    color: dodgerblue;
+    color: #46BDD7;
 }
 .wish-content .tabs2.contributor .tab {
     color: white;
@@ -516,13 +541,15 @@ ion-side-menu ion-item img {
 
 .wish-content .tabs2.owner .tab img {
     margin-right: 2px;
+    position: relative;
+    top: 1px;
 }
 
 .wish-overlay {
     position: absolute;
     left: 20px;
     right: 20px;
-    z-index: 10;
+    z-index: 5;
     opacity: 1;
     transition: opacity 0.4s;
 }
@@ -589,16 +616,18 @@ ion-side-menu ion-item img {
     top: 0;
     left: 0;
 }
-
+ul.message-coll {
+    margin-bottom: 60px;
+}
 ul.message-coll li {
     position: relative;
     margin: 28px 30px 20px 70px;
-    background-color: lightblue;
+    background-color: #cce7ed;
     border-radius: 5px;
     padding: 8px 12px;
 }
 ul.message-coll li.owner {
-    background-color: lightgray;
+    background-color: #e9e9e9;
     margin-top: 20px;
 }
 ul.message-coll img.bulle-bleu {
@@ -611,10 +640,15 @@ ul.message-coll img.bulle-grise {
     top: 11px;
     right: -6px;
 }
-ul.message-coll img.avatar {
+ul.message-coll .avatar img {
+    width: 40px;
+}
+ul.message-coll .avatar {
     position: absolute;
-    left: -55px;
-    top: -18px;
+    left: -51px;
+    top: -14px;
+    width: 40px;
+    height: 40px;
 }
 ul.message-coll .user {
     position: absolute;
@@ -627,8 +661,8 @@ ul.message-coll .time {
     position: absolute;
     font-size: x-small;
     color: gray;
-    left: -47px;
-    bottom: -9px;
+    left: -45px;
+    top: 25px;
 }
 
 .repeat-animation.ng-enter-stagger {
@@ -722,6 +756,7 @@ form.login {
 
 .login-content {
     background: url(../assets/images/fond.png);
+    background-repeat: round;
 }
 
 .login-input {
@@ -806,6 +841,7 @@ form.login {
     position: absolute;
     top: 10px;
     left: 20px;
+    width: 130px;
 }
 .datetime-input .content1 .title2 {
     position: absolute;
@@ -894,8 +930,10 @@ form.login {
 
 .gray { background-color: gray; }
 .purple { background-color: #9a00af; }
-.facebook { background-color: #3c5a98;; }
-.blue { background-color: #46bdd7; }
+.facebook { background-color: #3c5a98; }
+.blue { background-color: #46bdd7 !important; }
+.lightblue { background-color: #cce7ed !important; }
+.lightgray { background-color: #e9e9e9 !important; }
 .white-text { color: white; }
 
 ion-list.chat-coll ion-item {
@@ -1011,6 +1049,7 @@ ion-list.chat-coll ion-item .crop-container {
     position: absolute;
     top: 0;
     text-align: center;
+    background-repeat: round;
 }
 
 .splash-screen img {
@@ -1067,6 +1106,55 @@ input {
     position: absolute;
     bottom: 14px;
     right: 14px;
+}
+
+.popup {
+    padding: 5px;
+}
+.popup-body {
+    padding: 10px 40px;
+    overflow: auto;
+    text-align: center;
+}
+.popup-title {
+    position: relative;
+    top: 10px;
+}
+.popup-buttons .button.button-positive {
+    background-color: #46BDD7;
+}
+.popup-buttons .button {
+    min-height: 0;
+    height: 35px;
+    border: none;
+    background-color: lightgray;
+    margin-right: 10px;
+}
+.popup-container .popup {
+    width: 275px;   
+}
+.popup-buttons {
+    min-height: 0;   
+}
+
+.item-options {
+    width: 50%;
+}
+.item-options ion-option-button {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+.item-options ion-option-button.activated {
+    background-color: black;
+}
+.item-options .center-text {
+    font-weight: 500;
+}
+
+.center-text {
+    text-align: center;
+    margin: auto;
 }
 
 

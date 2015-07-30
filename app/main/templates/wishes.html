@@ -5,15 +5,18 @@
         </div>
         <ion-list can-swipe="true" class="wish-coll2">
             <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.wishes | orderBy: 'date_start': true" class="repeat-animation">
-                <ion-option-button class="ion-minus-circled"
+                <ion-option-button 
                                    ng-click="vm.confirmCancel(wish)">
+                    <div class="center-text">
+                        Supprimer
+                    </div>
                 </ion-option-button>
                 <div class="container">
                     <div class="title">
                         {{ wish.title }}
                     </div>
                     <div class="date">
-                        {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
+                        <span ng-bind-html="wish.date_start | cdate"></span> - {{ wish.user_range }}150m
                     </div>
                     <div class="contrib">
                         <img src="main/assets/images/picto-participants.png" alt="">
@@ -39,7 +42,7 @@
                         {{ wish.title }}
                     </div>
                     <div class="date">
-                        {{ wish.date_start | cdate }} - {{ wish.user_range }}150m
+                        <span ng-bind-html="wish.date_start | cdate"></span> - {{ wish.user_range }}150m
                     </div>
                     <div class="contrib">
                         <img src="main/assets/images/picto-participants.png" alt="">

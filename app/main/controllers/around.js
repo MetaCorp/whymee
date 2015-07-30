@@ -45,13 +45,13 @@ angular.module('main')
         event.preventDefault();
         confirmPopup = $ionicPopup.confirm({
             title: wish.title,
-            template: 'Voulez vous quitter l\'envie?',
+            template: 'Êtes vous sûr de vouloir quitter cette envie?',
             cancelText: 'Annuler',
             okText: 'Quitter'
         });
 
         confirmPopup.then(function(res) {
-            if (res)
+            if (res) // TODO ; remove contributor
                 vm.unPendingWish(wish);
         });
     };
@@ -81,11 +81,15 @@ angular.module('main')
             latitude: vm.user.location.lat,
             longitude: vm.user.location.long
         };
+        vm.selectedWish = null;
 
         vm.map.zoom = 16;
     };
 
-    vm.unPendingWish = function(wish) {
+    vm.unPendingWish = function(wish, event) {
+        event.stopPropagation();
+        event.preventDefault();
+
         wishStateDico[wish.id] = 'loading';
         Wishes.removePending(wish.id, user.uid).then(function() {
             wishStateDico[wish.id] = 'none';

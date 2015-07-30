@@ -3,12 +3,14 @@ angular.module('main')
     .controller('ChatCtrl', function($state, $stateParams, user, Users, Chats, Device) {
 
     console.log('Chat controller instanciated!');
-    
+
     var vm = this;
 
     vm.user = Users.getInfos(user.uid);
     vm.users = {};
-    
+
+    vm.messageTxt = '';
+
     var usersArray = [];
     Chats.getUsers($stateParams.chat).then(function(data) {
         usersArray = data;
@@ -27,7 +29,7 @@ angular.module('main')
     vm.profil = function() {
         //        $state.go('app.profil', { profil: $stateParams.chat });  
     };
-    
+
     vm.sendMessage = function(text) {
         var message = {
             text: text,
@@ -48,6 +50,7 @@ angular.module('main')
                 });
             }
         }
+        vm.messageTxt = '';
     };
 
     vm.getUser = function(userId) {

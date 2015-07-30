@@ -15,6 +15,6 @@ angular.module('main')
         else if (now.getDay() + 1 === date.getDay())
             prefix = 'Demain';
 
-        return prefix + ' à ' + $filter('date')(input, 'H\'h\'MM');
+        return '<strong>' + prefix + '</strong> à <strong>' + $filter('date')(input, 'H\'h\'MM') + '</strong>';
     };
 });

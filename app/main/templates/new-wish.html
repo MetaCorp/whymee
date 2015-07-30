@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div ng-show="vm.mapOpen" ng-class="{ open: vm.mapOpen }" class="map-content">
+        <div ng-show="vm.mapOpen" ng-class="{ open: vm.mapOpen }" ng-style="vm.mapTop" class="map-content newwish">
             <div class="map-container newwish">
                 <ui-gmap-google-map options="vm.map.options" refresh="true" center='vm.map.center' zoom='vm.map.zoom'>
                     <ui-gmap-marker coords="vm.marker.coords" options="vm.marker.options" events="vm.marker.events" idkey="vm.marker.id">

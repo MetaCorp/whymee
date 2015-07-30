@@ -1,22 +1,23 @@
 <ion-view view-title="{{ vm.chat.title }}">
-    <ion-content>
-        <ul class="message-coll">
-            <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
-                <img class="avatar" ng-hide="message.owner === vm.user.id" src ="main/assets/images/photo.png" ng-src="{{ vm.getUser(message.owner).avatar }}" alt="" class="circle" width="44" height="44">
-                <div class="title">{{ message.text }}</div>
-                <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
-                <div ng-hide="message.owner === vm.user.id" class="time">{{ message.date | date: "H'h'mm" }}</div>
-                <img ng-hide="message.owner === vm.user.id" class="bulle-bleu" src="main/assets/images/bulle-bleu.png" alt="">
-                <img ng-show="message.owner === vm.user.id" class="bulle-grise" src="main/assets/images/bulle-grise.png" alt="">
-            </li>
-        </ul>
-
-        <div class="new-message" style="top: {{ vm.screenHeight - 113 - 33 }}px">
-            <div class="input-field col s8">
-                <input ng-model="message" id="message" type="text">
-                <label for="message">Message</label>
-            </div>
-            <a ng-click="vm.sendMessage(message)" class="waves-effect waves-light btn">></a>
+    <ion-content scroll="false">
+        <ion-content>
+            <ul class="message-coll">
+                <li ng-class="{ owner : message.owner === vm.user.id }" ng-repeat="message in vm.messages | orderBy: 'date' : false">
+                   <div ng-hide="message.owner === vm.user.id" class="crop-container circle avatar">
+                        <img src="main/assets/images/photo.png" 
+                             ng-src="{{ ::vm.getUser(message.owner).avatar }}">
+                    </div>
+                    <div class="title">{{ message.text }}</div>
+                    <div ng-hide="message.owner === vm.user.id" class="user">{{ vm.getUser(message.owner).username }}</div>
+                    <div ng-hide="message.owner === vm.user.id" class="time">{{ message.date | date: "H'h'mm" }}</div>
+                    <img ng-hide="message.owner === vm.user.id" class="bulle-bleu" src="main/assets/images/bulle-bleu.png" alt="">
+                    <img ng-show="message.owner === vm.user.id" class="bulle-grise" src="main/assets/images/bulle-grise.png" alt="">
+                </li>
+            </ul>
+        </ion-content>
+        <div class="new-message">
+            <input placeholder="Entrez un message ici" ng-model="vm.messageTxt" id="message" type="text">
+            <img ng-click="vm.sendMessage(vm.messageTxt)" class="action-message" src="main/assets/images/btn-option.png" alt="">
         </div>
     </ion-content>
 </ion-view>
