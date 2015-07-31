@@ -73,7 +73,7 @@
                 <div class="photo" ng-repeat="user in vm.contributorsInfos"
                      item-height="140" item-width="100">
 
-                    <div class="crop-container circle">
+                    <div ng-click="vm.goProfil(user.id)" class="crop-container circle">
                         <img width="80" src="main/assets/images/photo.png" 
                              ng-src="{{ ::user.avatar }}">
                     </div>
@@ -100,7 +100,7 @@
                 <ion-list class="chat-coll">
                     <ion-item ng-repeat="user in vm.pendingsInfos">
                         <img src="main/assets/images/photo.png" ng-src="{{ ::user.avatar }}" alt="" class="circle avatar" width="64" height="64">
-                        <span class="title">{{ ::user.first_name }}</span>
+                        <span class="title">{{ ::user.first_name || user.username }}</span>
                         <a class="action" ng-click="vm.acceptPending(user)"><i class="mdi-action-done"></i></a>
                     </ion-item>
                 </ion-list>

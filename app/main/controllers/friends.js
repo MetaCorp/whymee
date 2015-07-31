@@ -1,5 +1,5 @@
 'use strict';
-angular.module('main')
+angular.module('main')// TODO watch pendingsId, friendsId
     .controller('FriendsCtrl', function($state, user, Users) {
 
     var vm = this;
@@ -20,10 +20,12 @@ angular.module('main')
     });
 
     vm.selectFriend = function(profil) {
-        $state.go('app.profil', { profil: profil.id });
+        $state.go('app.profil', { id: profil.id });
     };
 
-    vm.confirmFriend = function(friend) {
+    vm.confirmFriend = function(friend, event) {
+        event.stopPropagation();
+        event.preventDefault();
         Users.addFriend(friend.id, user.uid);
         Users.confirmFriend(user.uid, friend.id);
     };

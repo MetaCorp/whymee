@@ -1,5 +1,5 @@
 'use strict';
-angular.module('main')
+angular.module('main')// TODO message pear to pear doublon
     .controller('ProfilCtrl', function($state, $stateParams, user, Users, Chats) {
 
     var vm = this;
@@ -8,27 +8,42 @@ angular.module('main')
     vm.profil = Users.getInfos($stateParams.id);
     vm.friends = [];
     vm.pendings = [];
-    vm.isFriend = false;
-    vm.isPending = false;
+
+    vm.state = $stateParams.id === user.uid ? 'owner' : 'none';
 
     Users.getFriends(user.uid).then(function(data) {
         vm.friends = data;
         console.log('vm.friends:', vm.friends);
         if (contains(vm.friends, $stateParams.id))
-            vm.isFriend = true; 
+            vm.state = 'friend'; 
     });
-    
+
     Users.getPendingFriends(user.uid).then(function(data) {
         vm.pendings = data;
-        console.log('$stateParams.id:', user.uid);
-        console.log('vm.pendings:', vm.pendings);
+        if (contains(vm.pendings, $stateParams.id))
+            vm.state = 'asking';
+    });
+
+    Users.getPendingFriends($stateParams.id).then(function(data) {
+        vm.pendings = data;
         if (contains(vm.pendings, user.uid))
-            vm.isPending = true;
+            vm.state = 'pending';
     });
 
     vm.addFriend = function() {
         Users.addPendingFriend($stateParams.id, user.uid);
-        vm.isPending = true;
+        vm.state = 'pending';
+    };
+
+    vm.unPendingFriend = function() {
+        Users.removePendingFriend($stateParams.id, user.uid);
+        vm.state = 'none';
+    };
+    
+    vm.confirmFriend = function() {
+        Users.addFriend($stateParams.id, user.uid);
+        Users.confirmFriend(user.uid, $stateParams.id);
+        vm.state = 'friend';
     };
 
     // FIXME chat id1 !== id2

@@ -3,6 +3,7 @@ angular.module('main')
     .factory('Wishes', function($q, Ref, $firebaseArray, $firebaseObject, Geocode, FbUtil) {
 
     var wishDico = {};
+    var stateDico = {};
 
     var wishes = $firebaseArray(Ref.child('wishes'));
 
@@ -35,7 +36,7 @@ angular.module('main')
     };
 
     var addPending = function(wishId, userId) { // TODO notif
-//        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        //        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         return FbUtil.addOrSet(Ref.child('wishes/' + wishId + '/pendings'), userId);
     };
 
@@ -83,6 +84,25 @@ angular.module('main')
         return $firebaseObject(Ref.child('wishes-loc/' + location.country + '/' + location.region + '/' + id));
     };
 
+    var removeContributor = function(wish, id) {
+        FbUtil.removeIdFromArray(Ref.child('wishes/' + wish.id + '/contributors'), id);
+        // TODO update nb contrib
+        var infos = getInfos(wish.id);
+
+        infos.$loaded(function() {
+            infos.contributors = infos.contributors - 1;
+            infos.$save();
+        });
+    };
+    
+    var getState = function(wishId) {
+        return stateDico[wishId];
+    };
+    
+    var setState = function(wishId, state) {
+        stateDico[wishId] = state;
+    };
+
     return {
         all: wishes,
         getRange: getRange,
@@ -97,6 +117,9 @@ angular.module('main')
         getPendingsInfos: getPendingsInfos,
         getFromLocation: getFromLocation,
         getIdFromLoc: getIdFromLoc,
-        getContributorsInfos: getContributorsInfos
+        getContributorsInfos: getContributorsInfos,
+        removeContributor: removeContributor,
+        getState: getState,
+        setState: setState
     };
 });

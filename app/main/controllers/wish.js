@@ -31,7 +31,7 @@ angular.module('main')
 
     vm.owner = null;
 
-    vm.state = 'none';
+    vm.state = Wishes.getState($stateParams.id);
 
     var confirmPopup = null;
 
@@ -98,11 +98,14 @@ angular.module('main')
                 console.log('vm.users:', vm.users);
             });
 
-            if (vm.wish.owner === user.uid)
+            if (vm.wish.owner === user.uid) {
                 vm.state = 'owner';
+                Wishes.setState($stateParams.id, 'owner');
+            }
             else
                 Users.getWishState(user.uid, $stateParams.id).then(function(data) {
                     vm.state = data;
+                    Wishes.setState($stateParams.id, data);
                 });
 
             uiGmapGoogleMapApi.then(function () {
@@ -158,12 +161,15 @@ angular.module('main')
             new: true
         });
         vm.state = 'pending';
+        Wishes.setState($stateParams.id, 'pending');
     };
 
     vm.unPendingWish = function() {
         vm.state = 'loading';
+        Wishes.setState($stateParams.id, 'loading');
         Wishes.removePending($stateParams.id, user.uid).then(function() {
             vm.state = 'none';
+            Wishes.setState($stateParams.id, 'none');
         });
     };
 
@@ -177,6 +183,7 @@ angular.module('main')
 
         confirmPopup.then(function(res) {
             if (res) {// TODO : remove contributor
+                Wishes.removeContributor($stateParams.id, user.uid);
                 $ionicHistory.nextViewOptions({
                     disableBack: true
                 });
@@ -185,8 +192,10 @@ angular.module('main')
         });
     };
 
-    vm.showProfil = function() {
-        $state.go('app.profil', { profil: vm.wish.owner });   
+    vm.goProfil = function(profilId) {
+        if (vm.state === 'none' || vm.state === 'pending') return;
+        
+        $state.go('app.profil', { id: profilId });   
     };
 
     vm.chat = function() {

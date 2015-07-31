@@ -52,7 +52,7 @@
                 <div ui-sref="app.newwish" class="gray newwish">Poster une envie</div>
             </div>
             <ion-list class="wish-coll">
-                <ion-item ng-repeat="wish in vm.wishes | orderBy: 'date_start' : true"
+                <ion-item ng-repeat="wish in vm.wishes | orderBy: 'date_start' : false"
                     ng-click="vm.selectWish(wish)" 
                     ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish)">
                     <div class="container">

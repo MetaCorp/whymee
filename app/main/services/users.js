@@ -61,7 +61,7 @@ angular.module('main')
     };
 
     var addPendingFriend = function(userId, friendId) {// TODO notif
-        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        Materialize.toast('Votre demande à bien été envoyée.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendingFriends'), friendId);
     };
 
@@ -70,19 +70,19 @@ angular.module('main')
     };
 
     var removePendingFriend = function(userId, friendId) {
-        var pendingsRef = Ref.child('users/' + userId + '/pendingFriends');
-        var pendings = $firebaseArray(pendingsRef);
-        pendings.$loaded(function() {
-            for (var i = 0; i < pendings.length; i++) 
-                if (pendings[i].$value === friendId)
-                    pendings.$remove(pendings[i]);
-        });
+        FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/pendingFriends'), friendId);
     };
 
     var confirmFriend = function(userId, friendId) {
+        var friend = getUserInfos(friendId);
+        Materialize.toast('Vous êtes maintenant ami(e)s avec ' + friend.first_name + '.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/friends'), friendId);
 
         removePendingFriend(userId, friendId);
+    };
+    
+    var removeFriend = function(userId, friendId) {
+        FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/friends'), friendId);
     };
 
     var addWish = function(userId, wish) {// TODO notif
@@ -218,12 +218,12 @@ angular.module('main')
         return def.promise;
     };
 
-    var updateGeoloc = function(userId, lat, long) {
+    var updateGeoloc = function(userId, location) {
+        console.log('new location:', location);
         var user = getUserInfos(userId);
 
         user.$loaded(function() {
-            user.location.lat = lat;
-            user.location.long = long;
+            user.location = location;
             user.$save();
         });
     };
@@ -238,6 +238,11 @@ angular.module('main')
 
     var getIdFromChat = function(userId, id) {
         return $firebaseObject(Ref.child('users/' + userId + '/chats/' + id));   
+    };
+    
+    var removeWish = function(userId, wish) {
+        FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/wishes'), wish.id);  
+        FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/chats'), wish.chat);  
     };
 
     return {
@@ -271,6 +276,9 @@ angular.module('main')
         deleteChat: deleteChat,
         getChatsIds: getChatsIds,
         getIdFromChat: getIdFromChat,
-        getIdFromWishes: getIdFromWishes
+        getIdFromWishes: getIdFromWishes,
+        removeWish: removeWish,
+        removePendingFriend: removePendingFriend,
+        removeFriend: removeFriend
     };
 });

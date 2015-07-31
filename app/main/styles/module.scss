@@ -26,8 +26,8 @@ body {
     font-family: Roboto;
 }
 
-ion-side-menu.left {
-
+ion-side-menu.right ion-header-bar {
+    border-bottom: 1px solid gray;
 }
 ion-side-menu.left ion-header-bar {
     height: 150px!important;   
@@ -233,6 +233,7 @@ ul.collection {
 ion-item.notif {
     font-size: small;
     border-bottom: 1px solid #dcdcdc;
+    border-bottom: 2px solid #dcdcdc !important;
 }
 ion-item.notif .title {
     position: absolute;
@@ -973,6 +974,10 @@ ion-list.chat-coll ion-item .crop-container {
     width: 80px;
     height: 80px;
     overflow: hidden;
+}
+
+ion-list.chat-coll.friends ion-item.pending img.action {
+    top: 39px;
 }
 
 .crop-container {

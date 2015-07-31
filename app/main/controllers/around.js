@@ -31,8 +31,6 @@ angular.module('main')
 
     vm.mapLoaded = false;
 
-    var wishStateDico = {};
-
     var confirmPopup = null;
 
     vm.preventProp = function(event) {
@@ -51,8 +49,11 @@ angular.module('main')
         });
 
         confirmPopup.then(function(res) {
-            if (res) // TODO ; remove contributor
-                vm.unPendingWish(wish);
+            if (res) {// TODO ; remove contributor
+                Wishes.removeContributor(wish.id, user.uid);
+                Users.removeWish(user.uid, wish);
+                Wishes.setState(wish.id, 'none');
+            }
         });
     };
 
@@ -60,9 +61,9 @@ angular.module('main')
         event.stopPropagation();
         event.preventDefault();
 
-        wishStateDico[wish.id] = 'loading';
+        Wishes.setState(wish.id, 'loading');
         Wishes.addPending(wish.id, user.uid).then(function() {
-            wishStateDico[wish.id] = 'pending';
+            Wishes.setState(wish.id, 'pending');
             Materialize.toast('Votre demande à bien été prise en compte.', 4000);
         });
 
@@ -90,9 +91,9 @@ angular.module('main')
         event.stopPropagation();
         event.preventDefault();
 
-        wishStateDico[wish.id] = 'loading';
+        Wishes.setState(wish.id, 'loading');
         Wishes.removePending(wish.id, user.uid).then(function() {
-            wishStateDico[wish.id] = 'none';
+            Wishes.setState(wish.id, 'none');
         });
     };
 
@@ -107,17 +108,17 @@ angular.module('main')
     vm.getWishState = function(wish) {
         if (wish === undefined || wish === null) return 'none';
 
-        if (wishStateDico[wish.id] === undefined) {
+        if (Wishes.getState(wish.id) === undefined) {
 
             if (wish.owner === user.uid)
-                wishStateDico[wish.id] = 'owner';
+                Wishes.setState(wish.id, 'owner');
             else
                 Users.getWishState(user.uid, wish.id).then(function(data) {
-                    wishStateDico[wish.id] = data;
+                    Wishes.setState(wish.id, data);
                 });
         }
 
-        return wishStateDico[wish.id];
+        return Wishes.getState(wish.id);
     };
 
     var markerClick = function(data) {
@@ -189,6 +190,8 @@ angular.module('main')
                 vm.user.location.address = data.results[0].formatted_address;
                 vm.user.location.country = Geocode.parse(data.results[0], 'country');
                 vm.user.location.region = Geocode.parse(data.results[0], 'administrative_area_level_1');
+                vm.user.location.city = 'Paris';
+                Users.updateGeoloc(user.uid, vm.user.location);
 
                 vm.wishIds = Wishes.getFromLocation(vm.user.location);
                 console.log('geocode location:', vm.user.location);
@@ -218,7 +221,7 @@ angular.module('main')
                                             id: wish.id,
                                             options: {
                                                 labelContent: '',
-                                                icon: 'main/assets/images/picto-geolocalisation-autres-copie-2.png'
+                                                icon: 'main/assets/images/picto-geolocalisation-autres.png'
                                             },
                                             events: {
                                                 click: markerClick
