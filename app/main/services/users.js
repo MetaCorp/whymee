@@ -56,12 +56,12 @@ angular.module('main')
     };
 
     var subscribeWish = function(userId, wishId) {// deprecated TODO notif
-        Materialize.toast('Votre demande à bien été prise en compte.', 4000);
+        Materialize.toast('Votre demande a bien été prise en compte.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendings'), wishId);
     };
 
     var addPendingFriend = function(userId, friendId) {// TODO notif
-        Materialize.toast('Votre demande à bien été envoyée.', 4000);
+        Materialize.toast('Votre demande a bien été envoyée.', 4000);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/pendingFriends'), friendId);
     };
 
@@ -244,6 +244,22 @@ angular.module('main')
         FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/wishes'), wish.id);  
         FbUtil.removeIdFromArray(Ref.child('users/' + userId + '/chats'), wish.chat);  
     };
+    
+    var getFriendsId = function(userId) {
+        return $firebaseArray(Ref.child('users/' + userId + '/friends'));  
+    };
+    
+    var getPendingFriendsId = function(userId) {
+        return $firebaseArray(Ref.child('users/' + userId + '/pendingFriends'));  
+    };
+    
+    var getIdFromPendingFriends = function(userId, id) {
+        return $firebaseObject(Ref.child('users/' + userId + '/pendingFriends/' + id));
+    };
+    
+    var getIdFromFriends = function(userId, id) {
+        return $firebaseObject(Ref.child('users/' + userId + '/friends/' + id));
+    };
 
     return {
         get: getUser,
@@ -279,6 +295,10 @@ angular.module('main')
         getIdFromWishes: getIdFromWishes,
         removeWish: removeWish,
         removePendingFriend: removePendingFriend,
-        removeFriend: removeFriend
+        removeFriend: removeFriend,
+        getFriendsId: getFriendsId,
+        getPendingFriendsId: getPendingFriendsId,
+        getIdFromPendingFriends: getIdFromPendingFriends,
+        getIdFromFriends: getIdFromFriends
     };
 });

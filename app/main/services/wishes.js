@@ -102,6 +102,14 @@ angular.module('main')
     var setState = function(wishId, state) {
         stateDico[wishId] = state;
     };
+    
+    var getIdFromPendings = function(wishId, id) {
+        return $firebaseObject(Ref.child('wishes/' + wishId + '/pendings/' + id));
+    };
+    
+    var getIdFromContributors = function(wishId, id) {
+        return $firebaseObject(Ref.child('wishes/' + wishId + '/contributors/' + id));
+    };
 
     return {
         all: wishes,
@@ -120,6 +128,8 @@ angular.module('main')
         getContributorsInfos: getContributorsInfos,
         removeContributor: removeContributor,
         getState: getState,
-        setState: setState
+        setState: setState,
+        getIdFromPendings: getIdFromPendings,
+        getIdFromContributors: getIdFromContributors
     };
 });

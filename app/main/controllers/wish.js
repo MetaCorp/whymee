@@ -7,10 +7,15 @@ angular.module('main')
     vm.tabState = 'contributors';
 
     vm.user = Users.getInfos(user.uid);
-    vm.pendings = Wishes.getPendings($stateParams.id);
-    vm.contributors = Wishes.getContributors($stateParams.id);
-    vm.contributorsInfos = [];
+    vm.pendings = [];
+    vm.pendingsId = Wishes.getPendings($stateParams.id);
+    vm.contributorsId = Wishes.getContributors($stateParams.id);
+    vm.contributors = [];
 
+    Wishes.getPendingsInfos($stateParams.id).then(function(data) {
+        vm.pendings = data;
+    });
+    
     Wishes.getContributorsInfos($stateParams.id).then(function(data) {
         vm.contributorsInfos = data;
         console.log('data:', data);
@@ -35,25 +40,38 @@ angular.module('main')
 
     var confirmPopup = null;
 
-    /* TODO update real time pending */
-    vm.pendings.$watch(function(event) {
+    vm.contributorsId.$watch(function(event) {
         switch(event.event) {
             case 'child_added':
-                //                Wishes.getIdFromPendings(user.uid, event.key).$loaded(function(data) {
-                //                    console.log('child added:', data);
-                //                    if (data.$value !== null) {
-                //                        Users.getInfos(data.$value).$loaded(function(data) {
-                //                            vm.pendings.push(data); 
-                //                        });
-                //                    }
-                //                });
+                Wishes.getIdFromContributors($stateParams.id, event.key).$loaded(function(data) {
+                    console.log('child added:', data);
+                    if (data.$value !== null) {
+                        Users.getInfos(data.$value).$loaded(function(data) {
+                            vm.contributors.push(data); 
+                        });
+                    }
+                });
                 break;
             case 'child_removed':
-                //                console.log('event:(remove)', event);
-                //                Wishes.getIdFromPendings(user.uid, event.key).$loaded(function(data) {
-                //                    var index = vm.pendings.indexOf(data);
-                //                    vm.chats.splice(index, 1);
-                //                });
+                console.log('child_removed pendings:', event);
+                break;
+        }
+    });
+    
+    vm.pendingsId.$watch(function(event) {
+        switch(event.event) {
+            case 'child_added':
+                Wishes.getIdFromPendings($stateParams.id, event.key).$loaded(function(data) {
+                    console.log('child added:', data);
+                    if (data.$value !== null) {
+                        Users.getInfos(data.$value).$loaded(function(data) {
+                            vm.pendings.push(data); 
+                        });
+                    }
+                });
+                break;
+            case 'child_removed':
+                console.log('child_removed pendings:', event);
                 break;
         }
     });
@@ -146,10 +164,6 @@ angular.module('main')
         });
     });
 
-    Wishes.getPendingsInfos($stateParams.id).then(function(data) {
-        vm.pendingsInfos = data;
-    });
-
     vm.subscribeWish = function() {
         Users.subscribeWish(vm.user.id, $stateParams.id);
         Wishes.addPending($stateParams.id, vm.user.id);
@@ -182,7 +196,7 @@ angular.module('main')
         });
 
         confirmPopup.then(function(res) {
-            if (res) {// TODO : remove contributor
+            if (res) {
                 Wishes.removeContributor($stateParams.id, user.uid);
                 $ionicHistory.nextViewOptions({
                     disableBack: true
@@ -205,7 +219,7 @@ angular.module('main')
     vm.acceptPending = function(user) {
         Wishes.addContributor(vm.wish, user.id);
         Wishes.removePending($stateParams.id, user.id);
-        vm.pendingsInfos.splice(0, 0);// TO DO remove user infos for real time
+        vm.pendings.splice(vm.pendings.indexOf(user), 1);// TO DO remove user infos for real time
     };
 
     var contains = function(array, id) {
