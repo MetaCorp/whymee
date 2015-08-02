@@ -30,7 +30,9 @@
         <!-- menu header -->
         <ion-header-bar menu-close ui-sref="app.profil({ id: vm.user.id })" class="bar-stable">
             <img class="bg-img blur" ng-src="{{ vm.user.avatar }}" src="http://www.google.fr/url?source=imglanding&ct=img&q=http://assets.hellocoton.fr/avatars/square-256-106437-c4d98877da8e18898b10cdade03fcc21.png&sa=X&ved=0CAkQ8wc4N2oVChMIpOLVoq6HxgIViCvbCh2SWgDU&usg=AFQjCNHE7fCiIU5xycavsswxEc5xfl9eHg" alt="">
-            <img class="circle" ng-src="{{ vm.user.avatar }}" src="http://www.google.fr/url?source=imglanding&ct=img&q=http://assets.hellocoton.fr/avatars/square-256-106437-c4d98877da8e18898b10cdade03fcc21.png&sa=X&ved=0CAkQ8wc4N2oVChMIpOLVoq6HxgIViCvbCh2SWgDU&usg=AFQjCNHE7fCiIU5xycavsswxEc5xfl9eHg" alt="" width="80" height="80">
+            <div class="crop-container circle">
+                <img width="80" src="main/assets/images/photo.png" ng-src="{{ vm.user.avatar }}">
+            </div>
             <h1 class="content">{{ vm.user.first_name }}</h1>
             <span>Voir le profil</span>
         </ion-header-bar>

@@ -37,7 +37,7 @@ ion-side-menu.left ion-content {
     top: 150px!important;
 }
 
-ion-side-menu.left ion-header-bar img {
+ion-side-menu.left ion-header-bar .crop-container {
     position: absolute;
     top: 39px;
     left: 30px;
@@ -99,7 +99,7 @@ ion-side-menu.left ion-header-bar {
 
 ion-side-menu.left ion-header-bar .bg-img {
     position: absolute;
-    top: 0;
+    top: -100px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -270,7 +270,7 @@ ion-list.wish-coll ion-item {
 ion-list.wish-coll ion-item img {
     margin-right: 3px;
 }
-ion-list.wish-coll ion-item img.avatar {
+ion-list.wish-coll ion-item .avatar {
     position: absolute;
     left: 20px;
     top: 14px;
@@ -449,10 +449,8 @@ ion-side-menu ion-item img {
 }
 .wish-content .header .avatar {
     position: absolute;
-    left: 20px;
-    top: 18px;
-    width: 69px;
-    height: 69px;
+    left: 17px;
+    top: 11px;
 }
 .wish-content .header .title {
     position: absolute;
@@ -987,6 +985,9 @@ ion-list.chat-coll.friends ion-item.pending img.action {
     overflow: hidden;
     display: inline-block;
 }
+.crop-container img {
+    width: 80px;
+}
 .crop-container.small {
     width: 44px;
     height: 44px;
@@ -994,6 +995,20 @@ ion-list.chat-coll.friends ion-item.pending img.action {
 }
 .crop-container.small img {
     width: 44px;
+}    
+.crop-container.medium {
+    width: 69px;
+    height: 69px;
+}
+.crop-container.medium img {
+    width: 69px;
+}   
+.crop-container.medium2 {
+    width: 64px;
+    height: 64px;
+}
+.crop-container.medium2 img {
+    width: 64px;
 }    
 
 .Profil .row2 {

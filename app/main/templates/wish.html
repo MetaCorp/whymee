@@ -8,7 +8,9 @@
         </div>
         <ion-content scroll="true" class="wish-content" style="top: {{ ::vm.screenHeight - 162 - 300 }}px">
             <div class="header blue">
-                <img ui-sref="app.profil({ id: vm.owner.id })" src="main/assets/images/photo.png" ng-src="{{ ::vm.owner.avatar }}" alt="" class="circle avatar">
+                <div ui-sref="app.profil({ id: vm.owner.id })" class="crop-container circle avatar">
+                    <img src="main/assets/images/photo.png" ng-src="{{ ::vm.owner.avatar }}">
+                </div>
                 <img ng-show="vm.state === 'none'"
                      ng-click="vm.subscribeWish()" 
                      class="btn-go" src="main/assets/images/btn-participer2.png" alt="">

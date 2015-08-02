@@ -9,8 +9,9 @@
             <ion-list class="z-depth-1 wish-coll">
                 <ion-item class="rounded" ng-click="vm.selectWish(vm.selectedWish)">
                     <div class="container">
-                        <img src="main/assets/images/photo.png" 
-                             ng-src="{{ ::vm.getUser(vm.selectedWish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <div class="crop-container medium circle avatar">
+                            <img src="main/assets/images/photo.png" ng-src="{{ ::vm.getUser(vm.selectedWish.owner).avatar }}" alt="">
+                        </div>
                         <div class="title">
                             {{ ::vm.selectedWish.title }}
                         </div>
@@ -53,10 +54,12 @@
             </div>
             <ion-list class="wish-coll">
                 <ion-item ng-repeat="wish in vm.wishes | orderBy: 'date_start' : false"
-                    ng-click="vm.selectWish(wish)" 
-                    ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish)">
+                          ng-click="vm.selectWish(wish)" 
+                          ng-hide="!vm.checkSex(wish.sex) || vm.checkDate(wish)">
                     <div class="container">
-                        <img src="main/assets/images/photo.png" ng-src="{{ ::vm.getUser(wish.owner).avatar }}" alt="" class="circle avatar" width="64" height="64">
+                        <div class="crop-container medium circle avatar">
+                            <img src="main/assets/images/photo.png" ng-src="{{ ::vm.getUser(wish.owner).avatar }}" alt="">
+                        </div>
                         <div class="title">
                             {{ ::wish.title }}
                         </div>
@@ -66,7 +69,7 @@
                             {{ wish.user_range }}150m
                         </div>
                         <div class="date" ng-bind-html="wish.date_start | cdate">
-                           
+
                         </div>
                         <div class="contrib">
                             <img src="main/assets/images/picto-participants.png" alt="">
