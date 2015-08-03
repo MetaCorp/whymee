@@ -33,6 +33,10 @@ angular.module('main')
     var getWishes = function(userId) {
         return FbUtil.getItemsInfosFromIds(Ref.child('users/' + userId + '/wishes'), Ref.child('wishes'));
     };
+    
+    var getWishesJoin = function(userId) {
+        return FbUtil.getItemsInfosFromIds(Ref.child('users/' + userId + '/wishesJoin'), Ref.child('wishes'));
+    };
 
     var getHistoric = function(userId) {
         return FbUtil.getItemsInfosFromIds(Ref.child('users/' + userId + '/historic'), Ref.child('wishes'));
@@ -274,6 +278,7 @@ angular.module('main')
         confirmFriend: confirmFriend,
         getHistoric: getHistoric,
         getWishes: getWishes,
+        getWishesJoin: getWishesJoin,
         addWish: addWish,
         getNotifications: getNotifications,
         sendNotif: sendNotif,

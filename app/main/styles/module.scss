@@ -105,10 +105,14 @@ ion-side-menu.left ion-header-bar .bg-img {
     bottom: 0;
     width: 275px;
 }
-ion-side-menu.left ion-item badge-notif {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+ion-side-menu.left ion-item .badge-notif {
+    position: relative;
+    top: 5px;
+    right: -23px;
+    padding: 5px 9px;
+    border-radius: 14px;
+    float: right;
+    height: auto;
 }
 
 ion-side-menu ion-header-bar .content {
@@ -194,6 +198,37 @@ ul.collection {
     left: 0;
     /*    overflow-y: scroll;*/
 }
+
+.action-pendings {
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid lightgray;
+    padding: 3px 20px;
+    bottom: 0;
+    height: 46px;
+    background-color: white;
+    text-align: center;
+}
+.action-pendings .action.right {
+    float: right;
+    position: relative;
+    top: 8px;
+    right: 2px;
+}
+.action-pendings .action.left {
+    float: left;
+    position: relative;
+    top: 8px;
+    left: 2px;
+}
+.action-pendings .count {
+    color: lightgray;
+    position: relative;
+    top: 8px;
+    width: 200px;
+    margin: auto;
+}
+
 
 .new-message {
     position: absolute;
@@ -492,10 +527,14 @@ ion-side-menu ion-item img {
     padding: 20px;
     height: 400px;
 }
+.wish-content .content .photo .selected img {
+    filter: opacity(.4);
+}
 .wish-content .content .photo {
     text-align: center;
     width: 33%;
     display: inline-block;
+    margin-bottom: 12px;
 }
 .wish-content .content .title {
     width: 20%;
@@ -509,36 +548,35 @@ ion-side-menu ion-item img {
     position: relative;
     top: 20px;
 }
-.wish-content .tabs2 {
+.tabs2 {
     position: relative;
     background-color: #eeeeee;
     text-align: center;
     height: 35px;
 }
-.wish-content .tabs2 .tab {
+.tabs2 .tab {
     position: relative;
     top: -1px;
 }
-.wish-content .tabs2 .tab.selected .title {
+.tabs2 .tab.selected .title {
     color: #46BDD7;
 }
-.wish-content .tabs2.contributor .tab {
+.tabs2.contributor .tab {
     color: white;
     padding: 8px 40px;
     display: inline-block;
     font-size: medium;
 }
-.wish-content .tabs2.owner .tab {
+.tabs2.owner .tab {
     padding: 8px 16px;
     display: inline-block;
     font-size: medium;
 }
-.wish-content .tabs2 .tab .title {
+.tabs2 .tab .title {
     color: #515151;
     font: 500 12px Roboto;
 }
-
-.wish-content .tabs2.owner .tab img {
+.tabs2.owner .tab img {
     margin-right: 2px;
     position: relative;
     top: 1px;
@@ -928,8 +966,8 @@ form.login {
 .circle { border-radius: 50%; }
 
 .gray { background-color: gray; }
-.purple { background-color: #9a00af; }
-.facebook { background-color: #3c5a98; }
+.purple { background-color: #9a00af !important; }
+.facebook { background-color: #3c5a98 !important; }
 .blue { background-color: #46bdd7 !important; }
 .lightblue { background-color: #cce7ed !important; }
 .lightgray { background-color: #e9e9e9 !important; }
@@ -991,7 +1029,7 @@ ion-list.chat-coll.friends ion-item.pending img.action {
 .crop-container.small {
     width: 44px;
     height: 44px;
-    padding-right: 5px;
+    margin-right: 4px;
 }
 .crop-container.small img {
     width: 44px;
@@ -1177,6 +1215,10 @@ input {
     margin: auto;
 }
 
+.zdepth1 {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: box-shadow 2.225s ease-in-out;
+}
 
 
 /*======= Map Styling - CARE ============*/

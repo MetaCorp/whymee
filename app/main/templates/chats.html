@@ -4,7 +4,8 @@
             Aucun message, créez ou ralliez une envie!
         </div>
         <ion-list can-swipe="true" class="chat-coll">
-            <ion-item ng-click="vm.selectChat(chat)" ng-repeat="chat in vm.chats">
+            <ion-item ng-repeat="chat in vm.chats | orderBy : 'last.date'"
+                      ng-click="vm.selectChat(chat)">
                 <ion-option-button class="ion-minus-circled"
                                    ng-click="vm.confirmDelete(chat)">
                 </ion-option-button>

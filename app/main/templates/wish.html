@@ -73,7 +73,7 @@
 
             <div ng-show="vm.tabState === 'contributors'" class="content white">
                 <div class="photo" ng-repeat="user in vm.contributors"
-                     item-height="140" item-width="100">
+                     item-height="160" item-width="100">
 
                     <div ng-click="vm.goProfil(user.id)" class="crop-container circle">
                         <img width="80" src="main/assets/images/photo.png" 
@@ -97,15 +97,25 @@
                     </li>
                 </ul>
             </div>
-            <div ng-show="vm.tabState === 'pendings'" class="white">
-                <!--               TODO: update view after action -->
-                <ion-list class="chat-coll">
-                    <ion-item ng-repeat="user in vm.pendings">
-                        <img src="main/assets/images/photo.png" ng-src="{{ ::user.avatar }}" alt="" class="circle avatar" width="64" height="64">
-                        <span class="title">{{ ::user.first_name || user.username }}</span>
-                        <a class="action" ng-click="vm.acceptPending(user)"><i class="mdi-action-done"></i></a>
-                    </ion-item>
-                </ion-list>
+            <div ng-show="vm.tabState === 'pendings'" class="content white">
+                <div class="photo" ng-repeat="user in vm.pendings"
+                     item-height="140" item-width="100">
+
+                    <div ng-click="vm.selectProfil(user)" ng-class="{ selected: vm.getSelectedProfiles(user.id) }" class="crop-container circle">
+                        <img width="80" src="main/assets/images/photo.png" 
+                             ng-src="{{ ::user.avatar }}">
+                    </div>
+                    <div>{{ ::user.first_name || user.username }}</div>
+                </div>
+                <!--
+<ion-list class="chat-coll">
+<ion-item ng-repeat="user in vm.pendings">
+<img src="main/assets/images/photo.png" ng-src="{{ ::user.avatar }}" alt="" class="circle avatar" width="64" height="64">
+<span class="title">{{ ::user.first_name || user.username }}</span>
+<a class="action" ng-click="vm.acceptPending(user)"><i class="mdi-action-done"></i></a>
+</ion-item>
+</ion-list>
+-->
             </div>
 
 
@@ -114,6 +124,12 @@
         <div class="new-message" ng-show="vm.tabState === 'messages'">
             <input placeholder="Entrez un message ici" ng-model="vm.messageTxt" id="message" type="text">
             <img ng-click="vm.sendMessage(vm.messageTxt)" class="action-message" src="main/assets/images/btn-option.png" alt="">
+        </div>
+
+        <div class="action-pendings" ng-show="vm.tabState === 'pendings' && vm.profilesArray.length > 0">
+            <span ng-click="vm.rejectPendings()" class="action left">Refuser</span>
+            <span ng-click="vm.acceptPendings()" class="action right">Accepter</span>
+            <div class="count">{{ vm.profilesArray.length }} personne(s)</div>
         </div>
     </ion-content>
 </ion-view>

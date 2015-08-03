@@ -3,7 +3,18 @@
         <div ng-show="vm.wishes.length === 0 && vm.historic.length === 0">
             Aucune envie, créez ou ralliez une envie!
         </div>
-        <ion-list can-swipe="true" class="wish-coll2">
+        <div ng-hide="vm.wishes.length === 0 && vm.historic.length === 0" class="tabs2 contributor">
+            <span ng-click="vm.tabState = 'post'" 
+                  ng-class="{ selected: vm.tabState === 'post'}" class="tab">
+                <span class="title">Postées</span>
+            </span>
+            <span ng-click="vm.tabState = 'join'" 
+                  ng-class="{ selected: vm.tabState === 'join'}" class="tab">
+                <span class="title">Ralliées</span>
+            </span>
+        </div>
+
+        <ion-list ng-show="vm.tabState === 'post'" can-swipe="true" class="wish-coll2">
             <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.wishes | orderBy: 'date_start': true" class="repeat-animation">
                 <ion-option-button 
                                    ng-click="vm.confirmCancel(wish)">
@@ -33,9 +44,43 @@
                     </div>
                 </div>
             </ion-item>
-            <i  on-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.historic | orderBy: 'date_start': true" class="repeat-animation">
-                <ion-option-button class="ion-minus-circled"
-                                   ng-click="vm.confirmDelete(wish)">
+            <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.historic | orderBy: 'date_start': true" class="repeat-animation">
+                <ion-option-button ng-click="vm.confirmCancel(wish)">
+                    <div class="center-text">
+                        Supprimer
+                    </div>
+                </ion-option-button>
+                <div class="container">
+                    <div class="title">
+                        - {{ wish.title }}
+                    </div>
+                    <div class="date">
+                        <span ng-bind-html="wish.date_start | cdate"></span> - {{ wish.user_range }}150m
+                    </div>
+                    <div class="contrib">
+                        <img src="main/assets/images/picto-participants.png" alt="">
+                        {{ wish.contributors }}
+                    </div>
+                    <div class="avatar-list">
+                        <div ng-click="vm.goProfil(wish.owner, $event)" class="crop-container small circle">
+                            <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}">
+                        </div>
+                        <div ng-repeat="user in vm.getContributors(wish.id)"
+                             class="crop-container circle small">
+                            <img src="main/assets/images/photo.png" ng-src="{{ user.avatar }}">
+                        </div>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        
+        <ion-list ng-show="vm.tabState === 'join'" can-swipe="true" class="wish-coll2">
+            <ion-item ng-click="vm.selectWish(wish)" ng-repeat="wish in vm.wishesJoin | orderBy: 'date_start': true" class="repeat-animation">
+                <ion-option-button 
+                                   ng-click="vm.confirmCancel(wish)">
+                    <div class="center-text">
+                        Supprimer
+                    </div>
                 </ion-option-button>
                 <div class="container">
                     <div class="title">
@@ -49,7 +94,13 @@
                         {{ wish.contributors }}
                     </div>
                     <div class="avatar-list">
-                        <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}" alt="" class="circle">
+                        <div ng-click="vm.goProfil(wish.owner, $event)" class="crop-container small circle">
+                            <img src="main/assets/images/photo.png" ng-src="{{ vm.getUser(wish.owner).avatar }}">
+                        </div>
+                        <div ng-repeat="user in vm.getContributors(wish.id)"
+                             class="crop-container circle small">
+                            <img src="main/assets/images/photo.png" ng-src="{{ user.avatar }}">
+                        </div>
                     </div>
                 </div>
             </ion-item>

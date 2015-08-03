@@ -15,7 +15,7 @@ angular.module('main')
     Wishes.getPendingsInfos($stateParams.id).then(function(data) {
         vm.pendings = data;
     });
-    
+
     Wishes.getContributorsInfos($stateParams.id).then(function(data) {
         vm.contributorsInfos = data;
         console.log('data:', data);
@@ -34,11 +34,30 @@ angular.module('main')
     vm.screenWidth = Device.getWidth();
     vm.screenHeight = Device.getHeight();
 
+    vm.selectedProfiles = [];
+    vm.profilesArray = [];
+
     vm.owner = null;
 
     vm.state = Wishes.getState($stateParams.id);
 
     var confirmPopup = null;
+
+    vm.selectProfil = function(profil) {
+        console.log('select profil', profil.id);
+        if (vm.selectedProfiles[profil.id]) {
+            vm.selectedProfiles[profil.id] = false;
+            vm.profilesArray.splice(vm.profilesArray.indexOf(profil), 1);
+        }
+        else {
+            vm.selectedProfiles[profil.id] = true;
+            vm.profilesArray.push(profil);   
+        }
+    };
+
+    vm.getSelectedProfiles = function(userId) {
+        return vm.selectedProfiles[userId];  
+    };
 
     vm.contributorsId.$watch(function(event) {
         switch(event.event) {
@@ -57,7 +76,7 @@ angular.module('main')
                 break;
         }
     });
-    
+
     vm.pendingsId.$watch(function(event) {
         switch(event.event) {
             case 'child_added':
@@ -208,7 +227,7 @@ angular.module('main')
 
     vm.goProfil = function(profilId) {
         if (vm.state === 'none' || vm.state === 'pending') return;
-        
+
         $state.go('app.profil', { id: profilId });   
     };
 
@@ -219,7 +238,20 @@ angular.module('main')
     vm.acceptPending = function(user) {
         Wishes.addContributor(vm.wish, user.id);
         Wishes.removePending($stateParams.id, user.id);
-        vm.pendings.splice(vm.pendings.indexOf(user), 1);// TO DO remove user infos for real time
+        vm.pendings.splice(vm.pendings.indexOf(user), 1);
+    };
+
+    vm.acceptPendings = function() {
+        console.log('vm.profilesArray:', vm.profilesArray);
+        for(var i = 0; i < vm.profilesArray.length; i++) {
+            var user = vm.profilesArray[i];
+            console.log('user accepted:', user.id);
+            Wishes.addContributor(vm.wish, user.id);
+            Wishes.removePending($stateParams.id, user.id);
+            vm.pendings.splice(vm.pendings.indexOf(user), 1);
+        }
+        vm.profilesArray = [];
+        vm.selectedProfiles = [];
     };
 
     var contains = function(array, id) {

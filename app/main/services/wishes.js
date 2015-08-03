@@ -53,7 +53,6 @@ angular.module('main')
     };
 
     var getContributorsInfos = function(wishId) {
-        console.log('getContrib infos');
         return FbUtil.getItemsInfosFromIds(Ref.child('wishes/' + wishId + '/contributors'), Ref.child('users'));
     };
 
@@ -61,7 +60,7 @@ angular.module('main')
         FbUtil.addOrSet(Ref.child('wishes/' + wish.id + '/contributors'), userId);
 
         FbUtil.addOrSet(Ref.child('chats/' + wish.chat + '/infos/users'), userId);
-        FbUtil.addOrSet(Ref.child('users/' + userId + '/historic'), wish.id);
+        FbUtil.addOrSet(Ref.child('users/' + userId + '/wishesJoin'), wish.id);
         FbUtil.addOrSet(Ref.child('users/' + userId + '/chats'), wish.chat);
 
         var infos = getInfos(wish.id);

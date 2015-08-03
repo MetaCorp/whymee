@@ -11,11 +11,46 @@ angular.module('main')
 
     vm.historicIds = Users.getHistoricIds(user.uid);
     vm.historic = [];
+    
+    vm.wishesJoin = [];
+    
+    vm.tabState = 'post';
 
     var contribDico = {};
 
     var confirmPopup = null;
 
+    
+    Users.getWishesJoin(user.uid).then(function(data) {
+        vm.wishes = data;
+        console.log('wishes:', data);
+
+        function ret() {
+            //                    console.log('data:', data);
+            //                    contribDico[vm.wishes[i].id] = data;            
+        }
+
+        for(var i = 0; i < vm.wishes.length; i++) {
+            console.log('vm.wishes[i].id:', vm.wishes[i].id);
+            Wishes.getContributorsInfos(vm.wishes[i].id).then(ret);
+        }
+
+        vm.wishIds.$watch(function(event) {
+            switch(event.event) {
+                case 'child_added':
+                    Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
+                        console.log('child added:', data);
+                        if (data.$value !== null) {
+                            Wishes.getInfos(data.$value).$loaded(function(data) {
+                                vm.wishesJoin.push(data); 
+                            });
+                        }
+                    });
+                    break;
+            }
+        });
+    });
+    
     Users.getWishes(user.uid).then(function(data) {
         vm.wishes = data;
         console.log('wishes:', data);
@@ -41,14 +76,6 @@ angular.module('main')
                             });
                         }
                     });
-                    break;
-                case 'child_removed':
-                    console.log('event:', event);
-                    /*Users.getIdFromWishes(user.uid, event.key).$loaded(function(data) {
-                        var index = vm.wishes.indexOf(data);
-                        console.log('splice:', data);
-                        //vm.wishes.splice(index, 1);
-                    });*/
                     break;
             }
         });

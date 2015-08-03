@@ -47,6 +47,7 @@
                 <ion-item nav-clear menu-close ui-sref="app.wishes">
                     <img src="main/assets/images/picto-envies.png" alt="">
                     Mes envies
+                    <span ng-show="vm.wishNotif && vm.wishNotif.length > 0" menu-toggle="right" class="badge-notif purple">{{ vm.wishNotif.length }}</span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.around">
                     <img src="main/assets/images/picto-envies-proches.png" alt="">
@@ -55,11 +56,12 @@
                 <ion-item nav-clear menu-close ui-sref="app.chats">
                     <img src="main/assets/images/picto-messages.png" alt="">
                     Messages
-                    <span ng-show="vm.newChat" menu-toggle="right" class="badge-notif purple">{{ vm.newChat || 0 }}</span>
+                    <span ng-show="vm.chatNotif && vm.chatNotif.length > 0" menu-toggle="right" class="badge-notif purple">{{ vm.chatNotif.length }}</span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.friends">
                     <img src="main/assets/images/picto-amis.png" alt="">
                     Amis
+                    <span ng-show="vm.friendNotif && vm.friendNotif.length > 0" menu-toggle="right" class="badge-notif purple">{{ vm.friendNotif.length }}</span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.settings">
                     <img src="main/assets/images/picto-reglages.png" alt="">
